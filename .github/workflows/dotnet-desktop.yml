@@ -20,8 +20,11 @@ jobs:
     - name: Build project
       run: msbuild.exe /t:build /p:Configuration=Release /p:Platform="Any CPU" /p:OutputPath="src/bin/Release/" src/betterlauncher-cs.csproj
 
+    - name: Test directory?
+      run: dir src
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: BetterLauncher_${{ github.run_id }}_${{ github.sha }}
-        path: src/bin/Release/
+        path: src/bin/Release/*
