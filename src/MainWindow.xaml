@@ -1,0 +1,472 @@
+﻿<Window x:Class="betterlauncher_cs.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:betterlauncher_cs"
+        mc:Ignorable="d"
+        Title="BetterLauncher" Height="720" Width="1280" ResizeMode="NoResize" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Icon="/logo.png" WindowStyle="None" Background="{x:Null}" Initialized="Window_Initialized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="719*"/>
+        </Grid.RowDefinitions>
+        <Rectangle x:Name="handler"  Height="700" Width="1200" Fill="#191825" RadiusX="20" RadiusY="20" Margin="40,8,40,10" Grid.Row="1">
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="handler_in_height">
+                                <DoubleAnimation From="35" To="256" Duration="00:00:1" 
+                                    Storyboard.TargetName="handler" 
+                                    Storyboard.TargetProperty="Height">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="handler_in_width">
+                                <DoubleAnimation From="35" To="256" Duration="00:00:1" 
+                                    Storyboard.TargetName="handler" 
+                                    Storyboard.TargetProperty="Width">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="handler_in_radiusx">
+                                <DoubleAnimation From="35" To="10" Duration="00:00:1" 
+                                    Storyboard.TargetName="handler" 
+                                    Storyboard.TargetProperty="RadiusX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="handler_in_radiusy">
+                                <DoubleAnimation From="35" To="10" Duration="00:00:1" 
+                                    Storyboard.TargetName="handler" 
+                                    Storyboard.TargetProperty="RadiusY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="handler_out_height">
+                                <DoubleAnimation From="256" To="700" Duration="00:00:1" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="handler" 
+                                    Storyboard.TargetProperty="Height">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="handler_out_width">
+                                <DoubleAnimation From="256" To="1200" Duration="00:00:1" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="handler" 
+                                    Storyboard.TargetProperty="Width">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="handler_out_radiusx">
+                                <DoubleAnimation From="10" To="15" Duration="00:00:2" 
+                                    Storyboard.TargetName="handler" 
+                                    Storyboard.TargetProperty="RadiusX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="handler_out_radiusy">
+                                <DoubleAnimation From="10" To="15" Duration="00:00:2" 
+                                    Storyboard.TargetName="handler" 
+                                    Storyboard.TargetProperty="RadiusY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+
+        <!-- handler 3-part image animation -->
+
+        <Image x:Name="handler_logo_1" Height="200" Opacity="0" Source="/logo1.png" RenderTransformOrigin="0.5,0.5" Margin="0,258,0,260" Grid.Row="1">
+            <Image.Effect>
+                <DropShadowEffect Color="#FFB87FD9" BlurRadius="100" Direction="0" ShadowDepth="0"/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="handler_logo_1_transform" ScaleX="1" ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+
+
+
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="handler_logo_1_transform_scalex_in">
+                                <DoubleAnimation From="3" To="1" Duration="00:00:0.5" BeginTime="00:00:0.5"
+                                    Storyboard.TargetName="handler_logo_1_transform" 
+                                    Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="handler_logo_1_transform_scaley_in">
+                                <DoubleAnimation From="3" To="1" Duration="00:00:0.5" BeginTime="00:00:0.5"
+                                    Storyboard.TargetName="handler_logo_1_transform" 
+                                    Storyboard.TargetProperty="ScaleY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <!-- Opacity:Last -->
+
+                            <Storyboard x:Name="handler_logo_1_opacity_in">
+                                <DoubleAnimation From="0" To="1" Duration="00:00:0.5" BeginTime="00:00:0.5"
+                                    Storyboard.TargetName="handler_logo_1" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <!-- !EXPERIMENTAL! ScaleX,ScaleY down + Opacity down-->
+                            <Storyboard x:Name="handler_logo_1_transform_scalex_out">
+                                <DoubleAnimation From="1" To="0.1" Duration="00:00:0.5" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="handler_logo_1_transform" 
+                                    Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseIn"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                            <Storyboard x:Name="handler_logo_1_transform_scaley_out">
+                                <DoubleAnimation From="1" To="0.1" Duration="00:00:0.5" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="handler_logo_1_transform" 
+                                    Storyboard.TargetProperty="ScaleY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseIn"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                            <Storyboard x:Name="handler_logo_1_opacity_out">
+                                <DoubleAnimation From="1" To="0" Duration="00:00:0.5" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="handler_logo_1" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Image.Triggers>
+        </Image>
+        <Image x:Name="handler_logo_2" Height="200" Opacity="0" Source="/logo2.png" RenderTransformOrigin="0.5,0.5" Margin="0,258,0,260" Grid.Row="1">
+            <Image.Effect>
+                <DropShadowEffect Color="#FF933EC5" BlurRadius="100" Direction="0" ShadowDepth="0"/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="handler_logo_2_transform" ScaleY="1" ScaleX="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+
+
+
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="handler_logo_2_transform_scalex_in">
+                                <DoubleAnimation From="2" To="1" Duration="00:00:0.5" BeginTime="00:00:0.75"
+                                    Storyboard.TargetName="handler_logo_2_transform" 
+                                    Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="handler_logo_2_transform_scaley_in">
+                                <DoubleAnimation From="2" To="1" Duration="00:00:0.5" BeginTime="00:00:0.75"
+                                    Storyboard.TargetName="handler_logo_2_transform" 
+                                    Storyboard.TargetProperty="ScaleY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <!-- Opacity:Last -->
+
+                            <Storyboard x:Name="handler_logo_2_opacity_in">
+                                <DoubleAnimation From="0" To="1" Duration="00:00:0.5" BeginTime="00:00:0.75"
+                                    Storyboard.TargetName="handler_logo_2" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseIn"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <!-- !EXPERIMENTAL! ScaleX,ScaleY down + Opacity down-->
+                            <Storyboard x:Name="handler_logo_2_transform_scalex_out">
+                                <DoubleAnimation From="1" To="0.1" Duration="00:00:0.5" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="handler_logo_2_transform" 
+                                    Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseIn"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                            <Storyboard x:Name="handler_logo_2_transform_scaley_out">
+                                <DoubleAnimation From="1" To="0.1" Duration="00:00:0.5" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="handler_logo_2_transform" 
+                                    Storyboard.TargetProperty="ScaleY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseIn"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                            <Storyboard x:Name="handler_logo_2_opacity_out">
+                                <DoubleAnimation From="1" To="0" Duration="00:00:0.5" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="handler_logo_2" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Image.Triggers>
+        </Image>
+        <Image x:Name="handler_logo_3" Height="200" Opacity="0" Source="/logo3.png" RenderTransformOrigin="0.5,0.5" Margin="0,258,0,260" Grid.Row="1">
+            <Image.Effect>
+                <DropShadowEffect Color="#FF191825" BlurRadius="100" Direction="0" ShadowDepth="0"/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="handler_logo_3_transform" ScaleY="1" ScaleX="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+
+
+
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="handler_logo_3_transform_scalex_in">
+                                <DoubleAnimation From="3" To="1" Duration="00:00:0.5" BeginTime="00:00:1"
+                                    Storyboard.TargetName="handler_logo_3_transform" 
+                                    Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="handler_logo_3_transform_scaley_in">
+                                <DoubleAnimation From="3" To="1" Duration="00:00:0.5" BeginTime="00:00:1"
+                                    Storyboard.TargetName="handler_logo_3_transform" 
+                                    Storyboard.TargetProperty="ScaleY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <!-- Opacity:Last -->
+
+                            <Storyboard x:Name="handler_logo_3_opacity_in">
+                                <DoubleAnimation From="0" To="1" Duration="00:00:0.5" BeginTime="00:00:1"
+                                    Storyboard.TargetName="handler_logo_3" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <!-- !EXPERIMENTAL! ScaleX,ScaleY down + Opacity down-->
+                            <Storyboard x:Name="handler_logo_3_transform_scalex_out">
+                                <DoubleAnimation From="1" To="0.1" Duration="00:00:0.5" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="handler_logo_3_transform" 
+                                    Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseIn"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                            <Storyboard x:Name="handler_logo_3_transform_scaley_out">
+                                <DoubleAnimation From="1" To="0.1" Duration="00:00:0.5" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="handler_logo_3_transform" 
+                                    Storyboard.TargetProperty="ScaleY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseIn"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                            <Storyboard x:Name="handler_logo_3_opacity_out">
+                                <DoubleAnimation From="1" To="0" Duration="00:00:0.5" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="handler_logo_3" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Image.Triggers>
+        </Image>
+
+
+        <!-- contenthandler -->
+
+
+        <TabControl x:Name="contenthandler" Margin="68,10,64,29" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+            <TabItem x:Name="contenthandler_login" Header="Login">
+                <Grid>
+                    <!-- StatusBar -->
+                    <StackPanel x:Name="contenthandler_login_statusbar" Orientation="Horizontal" Margin="0,10,0,593" HorizontalAlignment="Center" Width="Auto">
+                        <Label x:Name="contenthandler_login_statusbar_text_1" FontSize="14" FontFamily="Segoe UI Black" Foreground="#FFA56EFF" Content="Zaloguj się" Height="29"/>
+                        <Rectangle Width="340" Height="1" Fill="#FF2D2D2D" Margin="20,0,20,0" />
+                        <Label x:Name="contenthandler_login_statusbar_text_2" FontSize="14" FontFamily="Segoe UI Black" Foreground="#7FFFFFFF" Content="Wybierz wersję gry" Height="29"/>
+                        <Rectangle Width="340" Height="1" Fill="#FF2D2D2D" Margin="20,0,20,0" />
+                        <Label x:Name="contenthandler_login_statusbar_text_3" FontSize="14" FontFamily="Segoe UI Black" Foreground="#7FFFFFFF" Content="Uruchamianie Gry" Height="29"/>
+                    </StackPanel>
+
+                    <!-- Left Side -->
+                    <Image x:Name="contenthandler_login_image" Height="256" Width="256" Margin="100,198,786,197" Source="/logo.png" OpacityMask="#33000000"></Image>
+                    <Label x:Name="contenthandler_login_header_1" Margin="149,248,835,325" Content="Better" FontFamily="Segoe UI Black" FontSize="48" Foreground="White" >
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="60" Color="White" Direction="0" ShadowDepth="0"/>
+                        </Label.Effect>
+                    </Label>
+                    <Label x:Name="contenthandler_login_header_2" Margin="116,295,802,274" Content="Launcher" FontFamily="Segoe UI Black" FontSize="48" Foreground="#FFA56EFF" >
+                        <Label.Effect>
+                            <DropShadowEffect Color="#3FA56EFF" BlurRadius="80" Direction="0" ShadowDepth="0"/>
+                        </Label.Effect>
+                    </Label>
+
+                    <!-- Right Side -->
+                    <Label x:Name="contenthandler_login_title" Margin="698,248,100,372" FontSize="14" FontFamily="Segoe UI Black" Foreground="#7FFFFFFF" Content="Nowy, zajebiście szybki launcher do minecrafta." HorizontalAlignment="Center"/>
+                    <Rectangle x:Name="contenthandler_login_msbutton" Margin="732,298,134,297" RadiusX="12" RadiusY="12" Fill="#FF9927BD" >
+                        <Rectangle.Effect>
+                            <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="30" Opacity="0.5"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    
+                    <!-- contenthandler_login_msbutton content -->
+                    <Path x:Name="contenthandler_login_msbutton_icon" Height="24" Width="24" Data="M0 32h214.6v214.6H0V32zm233.4 0H448v214.6H233.4V32zM0 265.4h214.6V480H0V265.4zm233.4 0H448V480H233.4V265.4z" Stretch="Fill" Margin="759,310,351,310" Fill="White">
+                        <Path.Effect>
+                            <DropShadowEffect Direction="0" BlurRadius="30" ShadowDepth="0" Color="White"/>
+                        </Path.Effect>
+                    </Path>
+                    <Label x:Name="contenthandler_login_msbutton_text" Margin="806,312,134,310" FontFamily="Segoe UI Black" Foreground="White" Content="Zaloguj się kontem Microsoft"/>
+                    
+                    <Rectangle x:Name="contenthandler_login_otherbutton" Margin="799,379,201,232" RadiusX="12" RadiusY="12" Fill="#FF2C2A44" >
+                        <Rectangle.Effect>
+                            <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="30" Opacity="0.5"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+
+
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="contenthandler_version" Header="Version">
+                <Grid></Grid>
+            </TabItem>
+            <TabItem x:Name="contenthandler_launch" Header="Launch">
+                <Grid></Grid>
+            </TabItem>
+
+            <!-- Animation -->
+
+            <TabControl.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="contenthandler_opacity">
+                                <DoubleAnimation From="0" To="1" Duration="00:00:0.5" BeginTime="00:00:2"
+                                    Storyboard.TargetName="contenthandler" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TabControl.Triggers>
+        </TabControl>
+
+
+        <!-- Navbar -->
+        <Rectangle x:Name="navbar" Margin="40,8,40,678" Height="32" RadiusX="8" RadiusY="8" Width="1200" Fill="#08090f" Grid.Row="1">
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="navbar_in_width">
+                                <DoubleAnimation From="32" To="1200" Duration="00:00:1" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="navbar" 
+                                    Storyboard.TargetProperty="Width">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                            <Storyboard x:Name="navbar_in_opacity">
+                                <DoubleAnimation From="0" To="1" Duration="00:00:1" BeginTime="00:00:1.5"
+                                    Storyboard.TargetName="navbar" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+    </Grid>
+</Window>
