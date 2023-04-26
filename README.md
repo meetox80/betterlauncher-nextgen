@@ -11,4 +11,4 @@
 
 Maintained by [lemonek](https://github.com/lemonekq).
 Built Using [WPF](https://github.com/dotnet/wpf), [.NET Framework](https://dotnet.microsoft.com/en-us/), [CMLib Auth](https://github.com/CmlLib/CmlLib.Core.Auth.Microsoft). <br>
-[Apache License](https://github.com/bettervulcan/betterlauncher-csharp/blob/main/LICENSE)
+[See Apache License 2.0](https://github.com/bettervulcan/betterlauncher-csharp/blob/main/LICENSE)
