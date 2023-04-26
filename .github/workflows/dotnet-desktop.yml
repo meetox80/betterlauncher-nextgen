@@ -13,13 +13,13 @@ jobs:
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.0.2
       - name: Restore NuGet Packages
-        run: nuget restore src/betterlauncher-cs.sln
+        run: nuget restore betterlauncher-cs.sln
       - name: Build
-        run: msbuild.exe src/betterlauncher-cs.csproj /p:Configuration=Release /p:Platform=x86
+        run: msbuild.exe betterlauncher-cs.csproj /p:Configuration=Release /p:Platform=x86
       - name: Publish
-        run: dotnet publish src/betterlauncher-cs.csproj -c Release -r win-x86 --self-contained true /p:PublishSingleFile=true
+        run: dotnet publish betterlauncher-cs.csproj -c Release -r win-x86 --self-contained true /p:PublishSingleFile=true
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: betterlauncher-cs.exe
-          path: ./src/bin/Release/netcoreapp3.1/win-x86/publish/betterlauncher-cs.exe
+          path: ./bin/Release/netcoreapp3.1/win-x86/publish/betterlauncher-cs.exe
