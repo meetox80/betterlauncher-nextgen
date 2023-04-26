@@ -18,10 +18,10 @@ jobs:
       run: nuget restore src/betterlauncher-cs.sln
 
     - name: Build project
-      run: msbuild.exe /t:build /p:Configuration=Release /p:Platform="Any CPU" betterlauncher-cs.csproj
+      run: msbuild.exe /t:build /p:Configuration=Release /p:Platform="Any CPU" src/betterlauncher-cs.csproj
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: BetterLauncher_${{ github.run_id }}_${{ github.sha }}
-        path: bin/Release/
+        path: src/bin/Release/
