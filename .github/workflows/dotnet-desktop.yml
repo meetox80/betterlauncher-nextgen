@@ -1,29 +1,27 @@
-name: Build C#
+name: Build - round 2.
+
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+
 jobs:
   build:
     runs-on: windows-latest
+
     steps:
-      - uses: actions/checkout@v2
-        with:
-          path: src
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
-      - name: Yeah, wrong directory i think.
-        run: cd src
-      - name: Test directory
-        run: dir
-      - name: Restore NuGet Packages
-        run: nuget restore betterlauncher-cs.sln
-      - name: Build
-        run: msbuild.exe betterlauncher-cs.csproj /p:Configuration=Release /p:Platform=x86
-      - name: Publish
-        run: dotnet publish betterlauncher-cs.csproj -c Release -r win-x86 --self-contained true /p:PublishSingleFile=true
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: betterlauncher-cs.exe
-          path: ./bin/Release/netcoreapp3.1/win-x86/publish/betterlauncher-cs.exe
+    - uses: actions/checkout@v2
+
+    - name: Setup MSBuild path
+      uses: microsoft/setup-msbuild@v1.0.3
+
+    - name: Restore NuGet packages
+      run: nuget restore betterlauncher-cs.sln
+
+    - name: Build project
+      run: msbuild.exe /t:build /p:Configuration=Release /p:Platform="Any CPU" betterlauncher-cs.csproj
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: BetterLauncher_${{ github.run_id }}_${{ github.sha }}
+        path: bin/Release/
