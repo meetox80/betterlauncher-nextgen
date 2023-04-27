@@ -43,11 +43,14 @@ namespace betterlauncher_cs
         private void mslogin_success(MSession session)
         {
             contenthandler.SelectedIndex = 1;
-            playerimage.Source = new BitmapImage(new Uri($"https://crafatar.com/renders/body/{session.UUID}"));
 
             BitmapImage playerimage_bg_bitmap = new BitmapImage(new Uri($"https://crafatar.com/avatars/{session.UUID}"));
             FormatConvertedBitmap playerimage_bg_grayscale = new FormatConvertedBitmap(playerimage_bg_bitmap, PixelFormats.Gray8, null, 0);
+
+
             playerimage_bg.Source = playerimage_bg_grayscale;
+            playerimage.Source = new BitmapImage(new Uri($"https://crafatar.com/renders/body/{session.UUID}"));
+            playernickname.Text = session.Username;
 
         }
         private async Task LoginAndShowResultOnUI(JavaEditionLoginHandler loginHandler)

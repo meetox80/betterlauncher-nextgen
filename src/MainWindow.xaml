@@ -416,7 +416,7 @@
                         <Rectangle Width="340" Height="1" Fill="#FF2D2D2D" Margin="20,0,20,0" />
                         <Label x:Name="contenthandler_version_statusbar_text_3" FontSize="14" FontFamily="Segoe UI Black" Foreground="#7FFFFFFF" Content="Uruchamianie Gry" Height="29"/>
                     </StackPanel>
-                    
+
                     <!-- Left side -->
                     <Image x:Name="playerimage_bg" Opacity="0.2" Source="https://crafatar.com/avatars/853c80ef3c3749fdaa49938b674adae6?size=100" Height="256" Width="256" Margin="66,199,820,198"/>
                     <Rectangle Opacity="0.5" x:Name="playerimage_bg_mask" Height="256" Width="256" Margin="66,199,820,198" Stroke="#99FFFFFF">
@@ -430,7 +430,10 @@
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Image x:Name="playerimage" Source="https://crafatar.com/renders/body/853c80ef3c3749fdaa49938b674adae6" Width="160" Height="512" Margin="114,71,868,70"/>
+                    <Image x:Name="playerimage" Source="https://crafatar.com/renders/body/853c80ef3c3749fdaa49938b674adae6" Width="160" Height="512" Margin="212,71,770,70"/>
+                    <TextBlock x:Name="playernickname" FontSize="20" TextAlignment="Left" FontFamily="Arial Black" Foreground="#7FFFFFFF" Margin="66,177,0,449" HorizontalAlignment="Left" Width="256" Text="8649"/>
+
+                    <!-- Right Side -->
                 </Grid>
             </TabItem>
             <TabItem x:Name="contenthandler_launch" Header="Launch">
