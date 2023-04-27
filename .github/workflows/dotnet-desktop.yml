@@ -26,5 +26,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: BetterLauncher_${{ github.run_id }}
+        name: BetterLauncher_CSHARP_${{ github.run_id }}
         path: src/bin/Release/betterlauncher-cs.exe
