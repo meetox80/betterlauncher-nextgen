@@ -7,6 +7,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace betterlauncher_cs
@@ -40,6 +43,12 @@ namespace betterlauncher_cs
         private void mslogin_success(MSession session)
         {
             contenthandler.SelectedIndex = 1;
+            playerimage.Source = new BitmapImage(new Uri($"https://crafatar.com/renders/body/{session.UUID}"));
+
+            BitmapImage playerimage_bg_bitmap = new BitmapImage(new Uri($"https://crafatar.com/avatars/{session.UUID}"));
+            FormatConvertedBitmap playerimage_bg_grayscale = new FormatConvertedBitmap(playerimage_bg_bitmap, PixelFormats.Gray8, null, 0);
+            playerimage_bg.Source = playerimage_bg_grayscale;
+
         }
         private async Task LoginAndShowResultOnUI(JavaEditionLoginHandler loginHandler)
         {
@@ -50,6 +59,8 @@ namespace betterlauncher_cs
             }
             catch (Exception ex)
             {
+                if (ex.ToString().Contains("canceled"))
+                    return;
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -60,11 +71,17 @@ namespace betterlauncher_cs
             loginHandler = new LoginHandlerBuilder()
                 .ForJavaEdition()
                 .WithMsalOAuth(app, factory => factory.CreateWithEmbeddedWebView())
-            .Build();
+                .Build();
 
             await LoginAndShowResultOnUI(loginHandler);
         }
         private void mslogin_init(object sender, System.Windows.Input.MouseButtonEventArgs e) => mslogin();
         #endregion
+
+        private void navbar_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                DragMove();
+        }
     }
 }
