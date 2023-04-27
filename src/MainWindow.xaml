@@ -99,7 +99,7 @@
 
         <!-- handler 3-part image animation -->
 
-        <Image x:Name="handler_logo_1" Height="200" Opacity="0" Source="/logo1.png" RenderTransformOrigin="0.5,0.5" Margin="0,258,0,260" Grid.Row="1">
+        <Image x:Name="handler_logo_1" Height="200" Opacity="0" Source="/logo1.png" RenderTransformOrigin="0.5,0.5" Margin="0,258,0,260" >
             <Image.Effect>
                 <DropShadowEffect Color="#FFB87FD9" BlurRadius="100" Direction="0" ShadowDepth="0"/>
             </Image.Effect>
@@ -183,7 +183,7 @@
                 </EventTrigger>
             </Image.Triggers>
         </Image>
-        <Image x:Name="handler_logo_2" Height="200" Opacity="0" Source="/logo2.png" RenderTransformOrigin="0.5,0.5" Margin="0,258,0,260" Grid.Row="1">
+        <Image x:Name="handler_logo_2" Height="200" Opacity="0" Source="/logo2.png" RenderTransformOrigin="0.5,0.5" Margin="0,258,0,260" >
             <Image.Effect>
                 <DropShadowEffect Color="#FF933EC5" BlurRadius="100" Direction="0" ShadowDepth="0"/>
             </Image.Effect>
@@ -267,7 +267,7 @@
                 </EventTrigger>
             </Image.Triggers>
         </Image>
-        <Image x:Name="handler_logo_3" Height="200" Opacity="0" Source="/logo3.png" RenderTransformOrigin="0.5,0.5" Margin="0,258,0,260" Grid.Row="1">
+        <Image x:Name="handler_logo_3" Height="200" Opacity="0" Source="/logo3.png" RenderTransformOrigin="0.5,0.5" Margin="0,258,0,260" >
             <Image.Effect>
                 <DropShadowEffect Color="#FF191825" BlurRadius="100" Direction="0" ShadowDepth="0"/>
             </Image.Effect>
@@ -356,7 +356,7 @@
         <!-- contenthandler -->
 
 
-        <TabControl x:Name="contenthandler" Margin="68,10,64,29" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+        <TabControl x:Name="contenthandler" Margin="68,10,64,29" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
             <TabItem x:Name="contenthandler_login" Header="Login">
                 <Grid>
                     <!-- StatusBar -->
@@ -370,12 +370,12 @@
 
                     <!-- Left Side -->
                     <Image x:Name="contenthandler_login_image" Height="256" Width="256" Margin="100,208,786,187" Source="/logo.png" OpacityMask="#33000000"></Image>
-                    <Label x:Name="contenthandler_login_header_1" Margin="149,248,835,325" Content="Better" FontFamily="Segoe UI Black" FontSize="48" Foreground="White" >
+                    <Label x:Name="contenthandler_login_header_1" Margin="149,271,835,302" Content="Better" FontFamily="Segoe UI Black" FontSize="48" Foreground="White" >
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="60" Color="White" Direction="0" ShadowDepth="0"/>
                         </Label.Effect>
                     </Label>
-                    <Label x:Name="contenthandler_login_header_2" Margin="116,295,802,274" Content="Launcher" FontFamily="Segoe UI Black" FontSize="48" Foreground="#FFA56EFF" >
+                    <Label x:Name="contenthandler_login_header_2" Margin="116,327,802,242" Content="Launcher" FontFamily="Segoe UI Black" FontSize="48" Foreground="#FFA56EFF" >
                         <Label.Effect>
                             <DropShadowEffect Color="#3FA56EFF" BlurRadius="80" Direction="0" ShadowDepth="0"/>
                         </Label.Effect>
@@ -454,7 +454,7 @@
 
 
         <!-- Navbar -->
-        <Rectangle x:Name="navbar" Margin="40,8,40,678" Height="32" RadiusX="8" RadiusY="8" Width="1200" Fill="#08090f" Grid.Row="1">
+        <Rectangle x:Name="navbar" Margin="40,8,40,678" Height="32" RadiusX="8" RadiusY="8" Width="1200" Fill="#08090f" >
             <Rectangle.Triggers>
                 <EventTrigger RoutedEvent="Window.Loaded">
                     <BeginStoryboard>

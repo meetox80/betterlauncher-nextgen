@@ -3,7 +3,7 @@ using System.IO;
 
 namespace betterlauncher_cs.modules
 {
-    internal class configmanager
+    internal class ConfigManager
     {
         public static string GetConfigFolder() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".betterlauncher");
         public static string GetConfigPath() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".betterlauncher/config.json");

@@ -25,36 +25,35 @@ namespace betterlauncher_cs
 
         private async void Window_Initialized(object sender, EventArgs e)
         {
-            configmanager.Prepare();
+            ConfigManager.Prepare();
             handler.Height = 35; handler.Width = 35; handler.RadiusX = 35; handler.RadiusY = 35;
             navbar.Opacity = 0.0f;
             contenthandler.Opacity = 0.0f;
             app = await MsalMinecraftLoginHelper.BuildApplicationWithCache(mslogin_clientid);
         }
 
+        #region MicrosoftLogin
         public static IPublicClientApplication app;
         public static JavaEditionLoginHandler loginHandler;
         public static MSession session;
         public static CancellationTokenSource loginCancel;
-        public static void loginSuccess(MSession session)
+        private void mslogin_success(MSession session)
         {
-            // session.accesstoken <=
+            contenthandler.SelectedIndex = 1;
         }
-
-        public static async Task LoginAndShowResultOnUI(JavaEditionLoginHandler loginHandler)
+        private async Task LoginAndShowResultOnUI(JavaEditionLoginHandler loginHandler)
         {
             try
             {
                 var session = await loginHandler.LoginFromOAuth();
-                loginSuccess(session.GameSession);
+                mslogin_success(session.GameSession);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
-
-        static async void mslogin()
+        private async void mslogin()
         {
             if (app == null) return;
 
@@ -65,7 +64,7 @@ namespace betterlauncher_cs
 
             await LoginAndShowResultOnUI(loginHandler);
         }
-
         private void mslogin_init(object sender, System.Windows.Input.MouseButtonEventArgs e) => mslogin();
+        #endregion
     }
 }
