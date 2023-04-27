@@ -395,15 +395,32 @@
                             <DropShadowEffect Direction="0" BlurRadius="30" ShadowDepth="0" Color="White"/>
                         </Path.Effect>
                     </Path>
-                    <Label x:Name="contenthandler_login_msbutton_text" Margin="809,312,0,310" FontFamily="Segoe UI Black" Foreground="White" Content="Zaloguj się kontem Microsoft" HorizontalAlignment="Left" MouseDown="mslogin_init"/>
+                    <Label x:Name="contenthandler_login_msbutton_text" Margin="805,311,0,311" FontFamily="Segoe UI Black" Foreground="White" Content="Zaloguj się kontem Microsoft" HorizontalAlignment="Left" MouseDown="mslogin_init"/>
 
-                    <Rectangle x:Name="contenthandler_login_otherbutton" Margin="799,379,201,232" RadiusX="12" RadiusY="12" Fill="#FF2C2A44" >
+                    <Rectangle x:Name="contenthandler_login_otherbutton" Margin="799,379,201,232" RadiusX="12" RadiusY="12" Fill="#FF2C2A44" MouseDown="contenthandler_login_otherbutton_MouseDown" >
+                        <Rectangle.Effect>
+                            <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="30" Opacity="0.5"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <Label x:Name="contenthandler_login_otherbutton_text" MouseDown="contenthandler_login_otherbutton_MouseDown" Content="Wybierz konto" HorizontalAlignment="Left" Margin="821,387,0,0" VerticalAlignment="Top" Width="98" Foreground="White" FontFamily="Segoe UI Black"/>
+
+                    <Rectangle x:Name="contenthandler_login_other_container" Margin="704,379,106,91" RadiusX="25" RadiusY="25" Fill="#FF121219" MouseDown="contenthandler_login_otherbutton_MouseDown">
                         <Rectangle.Effect>
                             <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="30" Opacity="0.5"/>
                         </Rectangle.Effect>
                     </Rectangle>
 
+                    <ScrollViewer x:Name="contenthandler_login_other_scrollviewer" Background="Transparent" Height="183" Margin="709,379,106,0" VerticalAlignment="Top" Width="327" VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="contenthandler_login_other_stackpanel" Background="Transparent">
+                        </StackPanel>
+                    </ScrollViewer>
 
+                    <Rectangle x:Name="contenthandler_login_other_addaccount" Margin="704,583,106,24" RadiusX="25" RadiusY="25" Fill="#FF121219">
+                        <Rectangle.Effect>
+                            <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="30" Opacity="0.5"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <TextBox TextAlignment="Center" BorderThickness="0" VerticalAlignment="Center" x:Name="contenthandler_login_other_addaccount_label" Margin="734,583,132,24" KeyDown="addaccount_submit" Background="{x:Null}" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" FontSize="16" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="contenthandler_version" Header="Version">
