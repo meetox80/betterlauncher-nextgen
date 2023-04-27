@@ -7,11 +7,7 @@
         mc:Ignorable="d"
         Title="BetterLauncher" Height="720" Width="1280" ResizeMode="NoResize" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Icon="/logo.png" WindowStyle="None" Background="{x:Null}" Initialized="Window_Initialized">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="719*"/>
-        </Grid.RowDefinitions>
-        <Rectangle x:Name="handler"  Height="700" Width="1200" Fill="#191825" RadiusX="20" RadiusY="20" Margin="40,8,40,10" Grid.Row="1">
+        <Rectangle x:Name="handler" Height="700" Width="1200" Fill="#191825" RadiusX="20" RadiusY="20" Margin="40,8,40,10">
             <Rectangle.Triggers>
                 <EventTrigger RoutedEvent="Window.Loaded">
                     <BeginStoryboard>
@@ -373,7 +369,7 @@
                     </StackPanel>
 
                     <!-- Left Side -->
-                    <Image x:Name="contenthandler_login_image" Height="256" Width="256" Margin="100,198,786,197" Source="/logo.png" OpacityMask="#33000000"></Image>
+                    <Image x:Name="contenthandler_login_image" Height="256" Width="256" Margin="100,208,786,187" Source="/logo.png" OpacityMask="#33000000"></Image>
                     <Label x:Name="contenthandler_login_header_1" Margin="149,248,835,325" Content="Better" FontFamily="Segoe UI Black" FontSize="48" Foreground="White" >
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="60" Color="White" Direction="0" ShadowDepth="0"/>
@@ -386,21 +382,21 @@
                     </Label>
 
                     <!-- Right Side -->
-                    <Label x:Name="contenthandler_login_title" Margin="698,248,100,372" FontSize="14" FontFamily="Segoe UI Black" Foreground="#7FFFFFFF" Content="Nowy, zajebiście szybki launcher do minecrafta." HorizontalAlignment="Center"/>
+                    <Label x:Name="contenthandler_login_title" Margin="698,248,100,372" FontSize="14" FontFamily="Segoe UI Black" Foreground="#7FFFFFFF" Content="Nowy, zajebiście szybki launcher do minecrafta." HorizontalAlignment="Center" MouseDown="mslogin_init"/>
                     <Rectangle x:Name="contenthandler_login_msbutton" Margin="732,298,134,297" RadiusX="12" RadiusY="12" Fill="#FF9927BD" >
                         <Rectangle.Effect>
                             <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="30" Opacity="0.5"/>
                         </Rectangle.Effect>
                     </Rectangle>
-                    
+
                     <!-- contenthandler_login_msbutton content -->
-                    <Path x:Name="contenthandler_login_msbutton_icon" Height="24" Width="24" Data="M0 32h214.6v214.6H0V32zm233.4 0H448v214.6H233.4V32zM0 265.4h214.6V480H0V265.4zm233.4 0H448V480H233.4V265.4z" Stretch="Fill" Margin="759,310,351,310" Fill="White">
+                    <Path x:Name="contenthandler_login_msbutton_icon" Height="24" Width="24" Data="M0 32h214.6v214.6H0V32zm233.4 0H448v214.6H233.4V32zM0 265.4h214.6V480H0V265.4zm233.4 0H448V480H233.4V265.4z" Stretch="Fill" Margin="759,310,351,310" Fill="White" MouseDown="mslogin_init">
                         <Path.Effect>
                             <DropShadowEffect Direction="0" BlurRadius="30" ShadowDepth="0" Color="White"/>
                         </Path.Effect>
                     </Path>
-                    <Label x:Name="contenthandler_login_msbutton_text" Margin="806,312,134,310" FontFamily="Segoe UI Black" Foreground="White" Content="Zaloguj się kontem Microsoft"/>
-                    
+                    <Label x:Name="contenthandler_login_msbutton_text" Margin="809,312,0,310" FontFamily="Segoe UI Black" Foreground="White" Content="Zaloguj się kontem Microsoft" HorizontalAlignment="Left" MouseDown="mslogin_init"/>
+
                     <Rectangle x:Name="contenthandler_login_otherbutton" Margin="799,379,201,232" RadiusX="12" RadiusY="12" Fill="#FF2C2A44" >
                         <Rectangle.Effect>
                             <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="30" Opacity="0.5"/>
@@ -411,10 +407,28 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="contenthandler_version" Header="Version">
-                <Grid></Grid>
+                <Grid>
+                    <!-- StatusBar -->
+                    <StackPanel x:Name="contenthandler_version_statusbar" Orientation="Horizontal" Margin="0,10,0,593" HorizontalAlignment="Center" Width="Auto">
+                        <Label x:Name="contenthandler_version_statusbar_text_1" FontSize="14" FontFamily="Segoe UI Black" Foreground="#7FFFFFFF" Content="Zaloguj się" Height="29"/>
+                        <Rectangle Width="340" Height="1" Fill="#FF2D2D2D" Margin="20,0,20,0" />
+                        <Label x:Name="contenthandler_version_statusbar_text_2" FontSize="14" FontFamily="Segoe UI Black" Foreground="#FFA56EFF" Content="Wybierz wersję gry" Height="29"/>
+                        <Rectangle Width="340" Height="1" Fill="#FF2D2D2D" Margin="20,0,20,0" />
+                        <Label x:Name="contenthandler_version_statusbar_text_3" FontSize="14" FontFamily="Segoe UI Black" Foreground="#7FFFFFFF" Content="Uruchamianie Gry" Height="29"/>
+                    </StackPanel>
+                </Grid>
             </TabItem>
             <TabItem x:Name="contenthandler_launch" Header="Launch">
-                <Grid></Grid>
+                <Grid>
+                    <!-- StatusBar -->
+                    <StackPanel x:Name="contenthandler_launch_statusbar" Orientation="Horizontal" Margin="0,10,0,593" HorizontalAlignment="Center" Width="Auto">
+                        <Label x:Name="contenthandler_launch_statusbar_text_1" FontSize="14" FontFamily="Segoe UI Black" Foreground="#7FFFFFFF" Content="Zaloguj się" Height="29"/>
+                        <Rectangle Width="340" Height="1" Fill="#FF2D2D2D" Margin="20,0,20,0" />
+                        <Label x:Name="contenthandler_launch_statusbar_text_2" FontSize="14" FontFamily="Segoe UI Black" Foreground="#7FFFFFFF" Content="Wybierz wersję gry" Height="29"/>
+                        <Rectangle Width="340" Height="1" Fill="#FF2D2D2D" Margin="20,0,20,0" />
+                        <Label x:Name="contenthandler_launch_statusbar_text_3" FontSize="14" FontFamily="Segoe UI Black" Foreground="#FFA56EFF" Content="Uruchamianie Gry" Height="29"/>
+                    </StackPanel>
+                </Grid>
             </TabItem>
 
             <!-- Animation -->
