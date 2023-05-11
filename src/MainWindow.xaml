@@ -383,7 +383,7 @@
 
                     <!-- Right Side -->
                     <Label x:Name="contenthandler_login_title" Margin="698,248,100,372" FontSize="14" FontFamily="Segoe UI Black" Foreground="#7FFFFFFF" Content="Nowy, zajebiście szybki launcher do minecrafta." HorizontalAlignment="Center" MouseDown="mslogin_init"/>
-                    <Rectangle x:Name="contenthandler_login_msbutton" Margin="732,298,134,297" RadiusX="12" RadiusY="12" Fill="#FF9927BD" >
+                    <Rectangle x:Name="contenthandler_login_msbutton" Margin="732,298,134,297" RadiusX="12" RadiusY="12" Fill="#FF9927BD" MouseDown="mslogin_init">
                         <Rectangle.Effect>
                             <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="80" Opacity="0.75" Color="#FFE38DFF"/>
                         </Rectangle.Effect>
