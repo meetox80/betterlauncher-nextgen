@@ -369,6 +369,11 @@
                     </StackPanel>
 
                     <!-- Left Side -->
+                    <Image x:Name="contenthandler_login_image_blur" Height="256" Width="256" Margin="100,208,786,187" Source="/logo.png" OpacityMask="#33000000">
+                        <Image.Effect>
+                            <BlurEffect Radius="50"/>
+                        </Image.Effect>
+                    </Image>
                     <Image x:Name="contenthandler_login_image" Height="256" Width="256" Margin="100,208,786,187" Source="/logo.png" OpacityMask="#33000000"></Image>
                     <Label x:Name="contenthandler_login_header_1" Margin="149,271,835,302" Content="Better" FontFamily="Segoe UI Black" FontSize="48" Foreground="White" >
                         <Label.Effect>
@@ -444,19 +449,23 @@
                         <StackPanel x:Name="contenthandler_version_handler_dist_content">
                             <StackPanel x:Name="contenthandler_version_handler_dist_content_release" Orientation="Horizontal">
                                 <Path Height="16" Width="16" Stretch="Fill" Data="M0 80v48c0 17.7 14.3 32 32 32H48 96V80c0-26.5-21.5-48-48-48S0 53.5 0 80zM112 32c10 13.4 16 30 16 48V384c0 35.3 28.7 64 64 64s64-28.7 64-64v-5.3c0-32.4 26.3-58.7 58.7-58.7H480V128c0-53-43-96-96-96H112zM464 480c61.9 0 112-50.1 112-112c0-8.8-7.2-16-16-16H314.7c-14.7 0-26.7 11.9-26.7 26.7V384c0 53-43 96-96 96H368h96z" Margin="10,0,0,0" Fill="White" />
-                                <Label Height="27" Width="100" Margin="5" FontFamily="Segoe UI Black" Foreground="White">Wydane</Label>
+                                <Label Height="27" Width="100" Margin="5" FontFamily="Segoe UI Black" Foreground="White" MouseDown="redirect_releases">Wydane</Label>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
                                 <Path Height="16" Width="16" Stretch="Fill" Data="M0 32c477.6 0 366.6 317.3 367.1 366.3L448 480h-26l-70.4-71.2c-39 4.2-124.4 34.5-214.4-37C47 300.3 52 214.7 0 32zm79.7 46c-49.7-23.5-5.2 9.2-5.2 9.2 45.2 31.2 66 73.7 90.2 119.9 31.5 60.2 79 139.7 144.2 167.7 65 28 34.2 12.5 6-8.5-28.2-21.2-68.2-87-91-130.2-31.7-60-61-118.6-144.2-158.1z" Margin="10,0,0,0" Fill="White" />
-                                <Label Height="27" Width="100" Margin="5" FontFamily="Segoe UI Black" Foreground="White">Snapshoty</Label>
+                                <Label Height="27" Width="100" Margin="5" FontFamily="Segoe UI Black" Foreground="White" MouseDown="redirect_snapshots">Snapshoty</Label>
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
 
                     <TabControl x:Name="contenthandler_version_handler_base" Margin="571,124,69,73" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" >
-                        <TabItem x:Name="contenthandler_version_handler_base_release" Visibility="Hidden">
-                            <Label Foreground="White">1 Testing @ contenthandler_version_handler_base_release</Label>
+                        <TabItem x:Name="contenthandler_version_handler_base_release" Visibility="Collapsed">
+                            <ScrollViewer HorizontalAlignment="Left" Background="Transparent" Width="500" VerticalScrollBarVisibility="Auto">
+                                <StackPanel Background="Transparent" Width="500">
+                                    <Label Height="30" Width="100" Foreground="White" FontFamily="Segoe UI Black" HorizontalAlignment="Left">Example</Label>
+                                </StackPanel>
+                            </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="contenthandler_version_handler_base_snapshots" Visibility="Hidden">
                             <Label Foreground="White">2 Testing @ contenthandler_version_handler_base_snapshots</Label>

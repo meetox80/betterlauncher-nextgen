@@ -88,5 +88,8 @@ namespace betterlauncher_cs
                 contenthandler_version_playernickname.Text = session.Username;
             }
         }
+
+        private void redirect_releases(object sender, System.Windows.Input.MouseButtonEventArgs e) { }
+        private void redirect_snapshots(object sender, System.Windows.Input.MouseButtonEventArgs e) { }
     }
 }
