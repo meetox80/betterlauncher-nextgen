@@ -96,53 +96,58 @@ namespace betterlauncher_cs
                 contenthandler_version_playernickname.Text = session.Username;
             }
 
-            var launcherver = new CMLauncher(new MinecraftPath());
-            MVersionCollection versions = await launcherver.GetAllVersionsAsync();
-            foreach (MVersionMetadata ver in versions)
+            var VersionLauncher = new CMLauncher(new MinecraftPath());
+            MVersionCollection VersionsListing = await VersionLauncher.GetAllVersionsAsync();
+            foreach (MVersionMetadata Version in VersionsListing)
             {
-                Debug.WriteLine(ver.ToString());
-                if (ver.ToString().StartsWith("release"))
+                Debug.WriteLine(Version.ToString());
+                if (Version.ToString().StartsWith("release"))
                 {
-                    Label releaselabel = new Label();
-                    releaselabel.Height = 30;
-                    releaselabel.Width = 100;
-                    releaselabel.Foreground = new SolidColorBrush(Colors.White);
-                    releaselabel.HorizontalAlignment = HorizontalAlignment.Left;
-                    releaselabel.FontFamily = new FontFamily("Segoe UI Black");
-                    releaselabel.Content = ver.ToString().Split(' ')[1];
-                    contenthandler_version_handler_base_release_stackpanel.Children.Add(releaselabel);
+                    Label ReleasesLabel = new Label();
+                    ReleasesLabel.Height = 30;
+                    ReleasesLabel.Width = 100;
+                    ReleasesLabel.Foreground = new SolidColorBrush(Colors.White);
+                    ReleasesLabel.HorizontalAlignment = HorizontalAlignment.Left;
+                    ReleasesLabel.FontFamily = new FontFamily("Segoe UI Black");
+                    ReleasesLabel.Content = Version.ToString().Split(' ')[1];
+                    contenthandler_version_handler_base_release_stackpanel.Children.Add(ReleasesLabel);
                 }
 
-                if (ver.ToString().StartsWith("snapshot"))
+                if (Version.ToString().StartsWith("snapshot"))
                 {
-                    Label snapshotslabel = new Label();
-                    snapshotslabel.Height = 30;
-                    snapshotslabel.Width = 100;
-                    snapshotslabel.Foreground = new SolidColorBrush(Colors.White);
-                    snapshotslabel.HorizontalAlignment = HorizontalAlignment.Left;
-                    snapshotslabel.FontFamily = new FontFamily("Segoe UI Black");
-                    snapshotslabel.Content = ver.ToString().Split(' ')[1];
-                    contenthandler_version_handler_base_snapshots_stackpanel.Children.Add(snapshotslabel);
+                    Label SnapshotsLabel = new Label();
+                    SnapshotsLabel.Height = 30;
+                    SnapshotsLabel.Width = 100;
+                    SnapshotsLabel.Foreground = new SolidColorBrush(Colors.White);
+                    SnapshotsLabel.HorizontalAlignment = HorizontalAlignment.Left;
+                    SnapshotsLabel.FontFamily = new FontFamily("Segoe UI Black");
+                    SnapshotsLabel.Content = Version.ToString().Split(' ')[1];
+                    contenthandler_version_handler_base_snapshots_stackpanel.Children.Add(SnapshotsLabel);
                 }
 
-                if (ver.ToString().StartsWith("local"))
+                if (Version.ToString().StartsWith("local"))
                 {
-                    Label localslabel = new Label();
-                    localslabel.Height = 30;
-                    localslabel.Width = 100;
-                    localslabel.Foreground = new SolidColorBrush(Colors.White);
-                    localslabel.HorizontalAlignment = HorizontalAlignment.Left;
-                    localslabel.FontFamily = new FontFamily("Segoe UI Black");
-                    localslabel.Content = ver.ToString().Split(' ')[1];
-                    contenthandler_version_handler_base_local_stackpanel.Children.Add(localslabel);
+                    Label LocalsLabel = new Label();
+                    LocalsLabel.Height = 30;
+                    LocalsLabel.Width = 100;
+                    LocalsLabel.Foreground = new SolidColorBrush(Colors.White);
+                    LocalsLabel.HorizontalAlignment = HorizontalAlignment.Left;
+                    LocalsLabel.FontFamily = new FontFamily("Segoe UI Black");
+                    LocalsLabel.Content = Version.ToString().Split(' ')[1];
+                    contenthandler_version_handler_base_local_stackpanel.Children.Add(LocalsLabel);
                 }
             }
 
             if (contenthandler_version_handler_base_local_stackpanel.Children.Count == 0)
             {
-                Label localslabel_empty = new Label();
-                localslabel_empty.Content = "Brak wersji :<";
-                contenthandler_version_handler_base_local_stackpanel.Children.Add(localslabel_empty);
+                Label LocalsLabel_Empty = new Label();
+                LocalsLabel_Empty.Content = "Brak wersji w .minecraft :<";
+                LocalsLabel_Empty.Foreground = new SolidColorBrush(Colors.White);
+                LocalsLabel_Empty.FontFamily = new FontFamily("Segoe UI Black");
+                LocalsLabel_Empty.HorizontalAlignment = HorizontalAlignment.Center;
+                LocalsLabel_Empty.VerticalAlignment = VerticalAlignment.Center;
+                LocalsLabel_Empty.FontSize = 20;
+                contenthandler_version_handler_base_local_stackpanel.Children.Add(LocalsLabel_Empty);
             }
         }
 
