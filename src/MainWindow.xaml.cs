@@ -1,11 +1,16 @@
-﻿using CmlLib.Core.Auth;
+﻿using CmlLib.Core;
+using CmlLib.Core.Auth;
 using CmlLib.Core.Auth.Microsoft;
 using CmlLib.Core.Auth.Microsoft.MsalClient;
+using CmlLib.Core.Version;
+using CmlLib.Core.VersionMetadata;
 using Microsoft.Identity.Client;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -25,6 +30,7 @@ namespace betterlauncher_cs
             InitializeComponent();
         }
 
+
         private async void Window_Initialized(object sender, EventArgs e)
         {
             handler.Height = 35; handler.Width = 35; handler.RadiusX = 35; handler.RadiusY = 35;
@@ -38,7 +44,7 @@ namespace betterlauncher_cs
         public static JavaEditionLoginHandler loginHandler;
         public static MSession session;
         public static CancellationTokenSource loginCancel;
-        private void mslogin_success(MSession session) => setinfo(session, null);
+        private void mslogin_success(MSession session) => setinfoAsync(session, null);
         private async Task LoginAndShowResultOnUI(JavaEditionLoginHandler loginHandler)
         {
             try
@@ -73,7 +79,7 @@ namespace betterlauncher_cs
                 DragMove();
         }
 
-        private void setinfo(MSession session, string username)
+        private async Task setinfoAsync(MSession session, string username)
         {
             contenthandler.SelectedIndex = 1;
 
@@ -87,9 +93,27 @@ namespace betterlauncher_cs
                 contenthandler_version_playerimage_blurred.Source = contenthandler_version_playerimage.Source;
                 contenthandler_version_playernickname.Text = session.Username;
             }
+
+            var launcherver = new CMLauncher(new MinecraftPath());
+            MVersionCollection versions = await launcherver.GetAllVersionsAsync();
+            foreach (MVersionMetadata ver in versions)
+            {
+                if (ver.ToString().StartsWith("release"))
+                {
+                    // Release TAB: Add release items
+                    Label releaselabel = new Label();
+                    releaselabel.Height = 30;
+                    releaselabel.Width = 100;
+                    releaselabel.Foreground = new SolidColorBrush(Colors.White);
+                    releaselabel.HorizontalAlignment = HorizontalAlignment.Left;
+                    releaselabel.FontFamily = new FontFamily("Segoe UI Black");
+                    releaselabel.Content = ver.ToString().Split(' ')[1];
+                    contenthandler_version_handler_base_release_stackpanel.Children.Add(releaselabel);
+                }
+            }
         }
 
-        private void redirect_releases(object sender, System.Windows.Input.MouseButtonEventArgs e) { }
-        private void redirect_snapshots(object sender, System.Windows.Input.MouseButtonEventArgs e) { }
+        private void redirect_releases(object sender, System.Windows.Input.MouseButtonEventArgs e) { contenthandler_version_handler_base.SelectedIndex = 0; }
+        private void redirect_snapshots(object sender, System.Windows.Input.MouseButtonEventArgs e) { contenthandler_version_handler_base.SelectedIndex = 1; }
     }
 }
