@@ -20,25 +20,27 @@ namespace betterlauncher_cs
 {
     public partial class MainWindow : Window
     {
-        public static string version = "0.0.0";
-        public static string mslogin_clientid = "c774e229-39fa-48ea-ad91-b0fb7e75945d";
-        public static string wantedlaunch = "";
+        public static string BetterLauncher_Version = "0.0.0";
+        public static string BetterLauncher_MsLoginClientID = "c774e229-39fa-48ea-ad91-b0fb7e75945d";
+        public static string BetterLauncher_WantedLaunch = "";
 
         public MainWindow()
         {
-            // post-app run lag spike on animations delay
-            Thread.Sleep(2500 / Environment.ProcessorCount);
             InitializeComponent();
         }
 
 
         private async void Window_Initialized(object sender, EventArgs e)
         {
+            // post-app run lag spike on animations delay
+            Thread.Sleep(2500 / Environment.ProcessorCount);
+
             handler.Height = 35; handler.Width = 35; handler.RadiusX = 35; handler.RadiusY = 35;
             navbar.Opacity = 0.0f;
             contenthandler.Opacity = 0.0f;
-            app = await MsalMinecraftLoginHelper.BuildApplicationWithCache(mslogin_clientid);
+            app = await MsalMinecraftLoginHelper.BuildApplicationWithCache(BetterLauncher_MsLoginClientID);
             releases_mainlabel.Foreground = new SolidColorBrush(Colors.OrangeRed);
+            this.Title = "BetterLauncher - " + BetterLauncher_Version;
         }
 
         #region MicrosoftLogin
@@ -97,7 +99,18 @@ namespace betterlauncher_cs
             }
 
             var VersionLauncher = new CMLauncher(new MinecraftPath());
+            Label WaitingForVersions = new Label();
+            WaitingForVersions.Content = "Oczekiwanie na API...";
+            WaitingForVersions.Foreground = new SolidColorBrush(Colors.White);
+            WaitingForVersions.FontFamily = new FontFamily("Segoe UI Black");
+            WaitingForVersions.HorizontalAlignment = HorizontalAlignment.Center;
+            WaitingForVersions.VerticalAlignment = VerticalAlignment.Center;
+            WaitingForVersions.FontSize = 20;
+
+            contenthandler_version_handler_base_release_stackpanel.Children.Add(WaitingForVersions);
+
             MVersionCollection VersionsListing = await VersionLauncher.GetAllVersionsAsync();
+            contenthandler_version_handler_base_release_stackpanel.Children.Clear();
             foreach (MVersionMetadata Version in VersionsListing)
             {
                 Debug.WriteLine(Version.ToString());

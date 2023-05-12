@@ -644,7 +644,8 @@
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Rectangle Height="4" Width="100" RadiusX="2" RadiusY="2" Fill="#FF1F1F3E" Margin="0,10,0,10"></Rectangle></StackPanel>
+                                <Rectangle Height="4" Width="100" RadiusX="2" RadiusY="2" Fill="#FF1F1F3E" Margin="0,10,0,10"></Rectangle>
+                            </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
 
@@ -737,5 +738,29 @@
                 </EventTrigger>
             </Rectangle.Triggers>
         </Rectangle>
+
+        <StackPanel x:Name="navbar_buttons" Orientation="Horizontal" Width="Auto" Height="32" Margin="40,9,40,679">
+
+            <StackPanel.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="navbar_buttons_in_opacity">
+                                <DoubleAnimation From="0" To="1" Duration="00:00:1" BeginTime="00:00:1.75"
+                                    Storyboard.TargetName="navbar_buttons" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </StackPanel.Triggers>
+            <Rectangle Height="12" Width="12" Fill="#FFFC5753" RadiusX="8" RadiusY="8" Margin="20,0,0,0" Stroke="#FFDF4744" StrokeThickness="2" />
+            <Rectangle Height="12" Width="12" Fill="#FFFDBC40" RadiusX="8" RadiusY="8" Margin="7.5,0,0,0" Stroke="#FFDE9F34" StrokeThickness="2" />
+            <Rectangle Height="12" Width="12" Fill="#7F113C17" RadiusX="8" RadiusY="8" Margin="7.5,0,0,0" Stroke="#7F0B3710" StrokeThickness="2" />
+        </StackPanel>
     </Grid>
 </Window>
