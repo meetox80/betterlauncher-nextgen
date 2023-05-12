@@ -22,6 +22,7 @@ namespace betterlauncher_cs
     {
         public static string version = "0.0.0";
         public static string mslogin_clientid = "c774e229-39fa-48ea-ad91-b0fb7e75945d";
+        public static string wantedlaunch = "";
 
         public MainWindow()
         {
@@ -37,6 +38,7 @@ namespace betterlauncher_cs
             navbar.Opacity = 0.0f;
             contenthandler.Opacity = 0.0f;
             app = await MsalMinecraftLoginHelper.BuildApplicationWithCache(mslogin_clientid);
+            releases_mainlabel.Foreground = new SolidColorBrush(Colors.OrangeRed);
         }
 
         #region MicrosoftLogin
@@ -98,9 +100,9 @@ namespace betterlauncher_cs
             MVersionCollection versions = await launcherver.GetAllVersionsAsync();
             foreach (MVersionMetadata ver in versions)
             {
+                Debug.WriteLine(ver.ToString());
                 if (ver.ToString().StartsWith("release"))
                 {
-                    // Release TAB: Add release items
                     Label releaselabel = new Label();
                     releaselabel.Height = 30;
                     releaselabel.Width = 100;
@@ -110,10 +112,49 @@ namespace betterlauncher_cs
                     releaselabel.Content = ver.ToString().Split(' ')[1];
                     contenthandler_version_handler_base_release_stackpanel.Children.Add(releaselabel);
                 }
+
+                if (ver.ToString().StartsWith("snapshot"))
+                {
+                    Label snapshotslabel = new Label();
+                    snapshotslabel.Height = 30;
+                    snapshotslabel.Width = 100;
+                    snapshotslabel.Foreground = new SolidColorBrush(Colors.White);
+                    snapshotslabel.HorizontalAlignment = HorizontalAlignment.Left;
+                    snapshotslabel.FontFamily = new FontFamily("Segoe UI Black");
+                    snapshotslabel.Content = ver.ToString().Split(' ')[1];
+                    contenthandler_version_handler_base_snapshots_stackpanel.Children.Add(snapshotslabel);
+                }
+
+                if (ver.ToString().StartsWith("local"))
+                {
+                    Label localslabel = new Label();
+                    localslabel.Height = 30;
+                    localslabel.Width = 100;
+                    localslabel.Foreground = new SolidColorBrush(Colors.White);
+                    localslabel.HorizontalAlignment = HorizontalAlignment.Left;
+                    localslabel.FontFamily = new FontFamily("Segoe UI Black");
+                    localslabel.Content = ver.ToString().Split(' ')[1];
+                    contenthandler_version_handler_base_local_stackpanel.Children.Add(localslabel);
+                }
+            }
+
+            if (contenthandler_version_handler_base_local_stackpanel.Children.Count == 0)
+            {
+                Label localslabel_empty = new Label();
+                localslabel_empty.Content = "Brak wersji :<";
+                contenthandler_version_handler_base_local_stackpanel.Children.Add(localslabel_empty);
             }
         }
 
-        private void redirect_releases(object sender, System.Windows.Input.MouseButtonEventArgs e) { contenthandler_version_handler_base.SelectedIndex = 0; }
-        private void redirect_snapshots(object sender, System.Windows.Input.MouseButtonEventArgs e) { contenthandler_version_handler_base.SelectedIndex = 1; }
+        private void ResetVersionsMainLabelColors()
+        {
+            releases_mainlabel.Foreground = new SolidColorBrush(Colors.White);
+            snapshots_mainlabel.Foreground = new SolidColorBrush(Colors.White);
+            locals_mainlabel.Foreground = new SolidColorBrush(Colors.White);
+        }
+
+        private void redirect_releases(object sender, System.Windows.Input.MouseButtonEventArgs e) { ResetVersionsMainLabelColors(); contenthandler_version_handler_base.SelectedIndex = 0; releases_mainlabel.Foreground = new SolidColorBrush(Colors.OrangeRed); }
+        private void redirect_snapshots(object sender, System.Windows.Input.MouseButtonEventArgs e) { ResetVersionsMainLabelColors(); contenthandler_version_handler_base.SelectedIndex = 1; snapshots_mainlabel.Foreground = new SolidColorBrush(Colors.OrangeRed); }
+        private void redirect_local(object sender, System.Windows.Input.MouseButtonEventArgs e) { ResetVersionsMainLabelColors(); contenthandler_version_handler_base.SelectedIndex = 2; locals_mainlabel.Foreground = new SolidColorBrush(Colors.OrangeRed); }
     }
 }
