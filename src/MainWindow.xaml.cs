@@ -4,6 +4,7 @@ using CmlLib.Core.Auth.Microsoft;
 using CmlLib.Core.Auth.Microsoft.MsalClient;
 using CmlLib.Core.Version;
 using CmlLib.Core.VersionMetadata;
+using DiscordRPC;
 using Microsoft.Identity.Client;
 using System;
 using System.Diagnostics;
@@ -14,6 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Button = DiscordRPC.Button;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace betterlauncher_cs
@@ -26,6 +28,44 @@ namespace betterlauncher_cs
 
         public MainWindow()
         {
+            // Discord RPC
+            DiscordRpcClient client = new DiscordRpcClient("1106998157772075058");
+            client.Initialize();
+
+#if DEBUG
+            client.SetPresence(new RichPresence()
+            {
+                Details = "Debugging an minecraft launcher",
+                State = "bettervulcan/betterlauncher-csharp",
+                Assets = new Assets()
+                {
+                    LargeImageKey = "debug",
+                    LargeImageText = "Debbuging BetterLaucnher",
+                    SmallImageKey = "logo"
+                },
+                Buttons = new Button[]
+                {
+                    new Button() { Label = "See the repo", Url = "https://github.com/bettervulcan/betterlauncher-csharp" }
+                }
+            });
+#else
+            client.SetPresence(new RichPresence()
+            {
+                Details = "Launching new minecraft instance",
+                State = "Proud owner of BetterLauncher.",
+                Assets = new Assets()
+                {
+                    LargeImageKey = "logo",
+                    LargeImageText = "BetterLauncher Logo",
+                    SmallImageKey = "mc-launcher"
+                },
+                Buttons = new Button[]
+                {
+                    new Button() { Label = "Download", Url = "https://github.com/bettervulcan/betterlauncher-csharp" }
+                }
+            });
+#endif
+
             InitializeComponent();
         }
 
@@ -203,7 +243,13 @@ namespace betterlauncher_cs
             }
         }
 
+        //
+        // Closing, Minimizing buttons
+        //
+
         private void wnd_close(object sender, System.Windows.Input.MouseButtonEventArgs e) { this.Close(); }
         private void wnd_minimize(object sender, System.Windows.Input.MouseButtonEventArgs e) { WindowState = WindowState.Minimized; }
+
+        
     }
 }

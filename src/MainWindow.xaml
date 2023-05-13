@@ -694,6 +694,17 @@
                         <Rectangle Width="340" Height="1" Fill="#FF2D2D2D" Margin="20,0,20,0" />
                         <Label x:Name="contenthandler_launch_statusbar_text_3" FontSize="14" FontFamily="Segoe UI Black" Foreground="#FFA56EFF" Content="Uruchamianie Gry" Height="29"/>
                     </StackPanel>
+
+                    <!-- Left side -->
+                    <Image x:Name="contenthandler_launch_playerimage" Source="https://visage.surgeplay.com/bust/512/c5f0c60916f34be19d2a8f39513c9a70" Margin="1,241,620,10" OpacityMask="Black" />
+                    <Rectangle x:Name="contenthandler_launch_playerimage_mask" Margin="0,241,679,0" >
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#00191825" Offset="0"/>
+                                <GradientStop Color="#FF191825" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
                 </Grid>
             </TabItem>
 
