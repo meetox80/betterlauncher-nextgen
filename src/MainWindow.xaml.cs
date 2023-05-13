@@ -123,6 +123,7 @@ namespace betterlauncher_cs
                     ReleasesLabel.HorizontalAlignment = HorizontalAlignment.Left;
                     ReleasesLabel.FontFamily = new FontFamily("Segoe UI Black");
                     ReleasesLabel.Content = Version.ToString().Split(' ')[1];
+                    ReleasesLabel.MouseDown += redirect_launch_releases;
                     contenthandler_version_handler_base_release_stackpanel.Children.Add(ReleasesLabel);
                 }
 
@@ -169,6 +170,24 @@ namespace betterlauncher_cs
             releases_mainlabel.Foreground = new SolidColorBrush(Colors.White);
             snapshots_mainlabel.Foreground = new SolidColorBrush(Colors.White);
             locals_mainlabel.Foreground = new SolidColorBrush(Colors.White);
+        }
+
+        private void redirect_launch_releases(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            foreach (var child in contenthandler_version_handler_base_release_stackpanel.Children)
+            {
+                if (child is Label childLabel)
+                {
+                    childLabel.Foreground = new SolidColorBrush(Colors.White);
+                }
+            }
+
+            if (sender is Label label)
+            {
+                label.Foreground = Brushes.OrangeRed;
+                contenthandler.SelectedIndex = 2;
+                BetterLauncher_WantedLaunch = label.Content.ToString();
+            }
         }
 
         private void redirect_releases(object sender, System.Windows.Input.MouseButtonEventArgs e) { ResetVersionsMainLabelColors(); contenthandler_version_handler_base.SelectedIndex = 0; releases_mainlabel.Foreground = new SolidColorBrush(Colors.OrangeRed); }
