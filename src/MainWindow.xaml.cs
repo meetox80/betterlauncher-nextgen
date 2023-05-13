@@ -23,17 +23,20 @@ namespace betterlauncher_cs
 {
     public partial class MainWindow : Window
     {
+        #region Variables
         public static string BetterLauncher_Version = "0.0.0";
         public static string BetterLauncher_MsLoginClientID = "c774e229-39fa-48ea-ad91-b0fb7e75945d";
         public static string BetterLauncher_WantedLaunch = "";
+        #endregion
 
+        #region RPC, Window code
         public MainWindow()
         {
             // Discord RPC
             DiscordRpcClient client = new DiscordRpcClient("1106998157772075058");
             client.Initialize();
 
-#if DEBUG
+            #if DEBUG
             client.SetPresence(new RichPresence()
             {
                 Details = "Debugging an minecraft launcher",
@@ -49,7 +52,7 @@ namespace betterlauncher_cs
                     new Button() { Label = "See the repo", Url = "https://github.com/bettervulcan/betterlauncher-csharp" }
                 }
             });
-#else
+            #else
             client.SetPresence(new RichPresence()
             {
                 Details = "Launching new minecraft instance",
@@ -84,13 +87,14 @@ namespace betterlauncher_cs
             releases_mainlabel.Foreground = new SolidColorBrush(Colors.OrangeRed);
             this.Title = "BetterLauncher - " + BetterLauncher_Version;
         }
+        #endregion
 
         #region MicrosoftLogin
         public static IPublicClientApplication app;
         public static JavaEditionLoginHandler loginHandler;
         public static MSession session;
         public static CancellationTokenSource loginCancel;
-        private void mslogin_success(MSession session) => setinfoAsync(session, null);
+        private async void mslogin_success(MSession session) => await setinfoAsync(session, null);
         private async Task LoginAndShowResultOnUI(JavaEditionLoginHandler loginHandler)
         {
             try
@@ -119,12 +123,7 @@ namespace betterlauncher_cs
         private void mslogin_init(object sender, System.Windows.Input.MouseButtonEventArgs e) => mslogin();
         #endregion
 
-        private void navbar_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                DragMove();
-        }
-
+        #region Versions
         private async Task setinfoAsync(MSession session, string username)
         {
             contenthandler.SelectedIndex = 1;
@@ -244,16 +243,18 @@ namespace betterlauncher_cs
             }
         }
 
-        //
-        // Closing, Minimizing buttons
-        //
+        #endregion
 
+        #region Navbar
         private void wnd_close(object sender, System.Windows.Input.MouseButtonEventArgs e) { this.Close(); }
         private void wnd_minimize(object sender, System.Windows.Input.MouseButtonEventArgs e) { WindowState = WindowState.Minimized; }
+
+        private void navbar_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) { DragMove(); } }
 
         private void wnd_close_enter(object sender, MouseEventArgs e) { Rectangle rect = (Rectangle)sender; rect.Opacity = 0.5f; }
         private void wnd_close_leave(object sender, MouseEventArgs e)  { Rectangle rect = (Rectangle)sender; rect.Opacity = 1.0f; }
         private void wnd_minimize_enter(object sender, MouseEventArgs e) { Rectangle rect = (Rectangle)sender; rect.Opacity = 0.5f; }
         private void wnd_minimize_leave(object sender, MouseEventArgs e) { Rectangle rect = (Rectangle)sender; rect.Opacity = 1.0f; }
+        #endregion
     }
 }
