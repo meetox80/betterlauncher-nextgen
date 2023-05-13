@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Button = DiscordRPC.Button;
+using System.Windows.Shapes;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace betterlauncher_cs
@@ -250,6 +251,9 @@ namespace betterlauncher_cs
         private void wnd_close(object sender, System.Windows.Input.MouseButtonEventArgs e) { this.Close(); }
         private void wnd_minimize(object sender, System.Windows.Input.MouseButtonEventArgs e) { WindowState = WindowState.Minimized; }
 
-        
+        private void wnd_close_enter(object sender, MouseEventArgs e) { Rectangle rect = (Rectangle)sender; rect.Opacity = 0.5f; }
+        private void wnd_close_leave(object sender, MouseEventArgs e)  { Rectangle rect = (Rectangle)sender; rect.Opacity = 1.0f; }
+        private void wnd_minimize_enter(object sender, MouseEventArgs e) { Rectangle rect = (Rectangle)sender; rect.Opacity = 0.5f; }
+        private void wnd_minimize_leave(object sender, MouseEventArgs e) { Rectangle rect = (Rectangle)sender; rect.Opacity = 1.0f; }
     }
 }
