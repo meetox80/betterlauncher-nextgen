@@ -626,8 +626,6 @@
 
                     <!-- Right Side -->
                     <Rectangle x:Name="contenthandler_version_handler" Margin="422,94,49,53" RadiusX="17.5" RadiusY="17.5" Fill="#FF100F1D" Stroke="#3FFFFFFF" />
-                    <Rectangle x:Name="contenthandler_version_handler_launchbutton" Margin="980,555,69,73" RadiusX="5" RadiusY="5" Fill="#FF100F1D" Stroke="#3FFFFFFF" />
-                    <Label FontFamily="" />
                     <ScrollViewer x:Name="contenthandler_version_handler_dist" HorizontalAlignment="Left" Height="456" Margin="442,124,0,0" VerticalAlignment="Top" Width="160" VerticalScrollBarVisibility="Auto">
                         <StackPanel x:Name="contenthandler_version_handler_dist_content">
                             <StackPanel x:Name="contenthandler_version_handler_dist_content_release" Orientation="Horizontal">
@@ -674,6 +672,16 @@
                             </ScrollViewer>
                         </TabItem>
                     </TabControl>
+
+                    <!-- Right:Highest layer-->
+
+                    <Button x:Name="contenthandler_version_handler_launchbutton" Content="Launch" HorizontalAlignment="Left" Margin="946,548,0,0" VerticalAlignment="Top" Click="launch_init" Height="32" Width="128" Background="{x:Null}" Foreground="White" BorderBrush="#3FFFFFFF" FontFamily="Segoe UI Black">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="8"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </Grid>
             </TabItem>
             <TabItem x:Name="contenthandler_launch" Header="Launch">

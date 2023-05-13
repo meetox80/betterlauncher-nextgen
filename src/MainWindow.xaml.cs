@@ -37,6 +37,7 @@ namespace betterlauncher_cs
 
             handler.Height = 35; handler.Width = 35; handler.RadiusX = 35; handler.RadiusY = 35;
             navbar.Opacity = 0.0f;
+            navbar_buttons.Opacity = 0.0f;
             contenthandler.Opacity = 0.0f;
             app = await MsalMinecraftLoginHelper.BuildApplicationWithCache(BetterLauncher_MsLoginClientID);
             releases_mainlabel.Foreground = new SolidColorBrush(Colors.OrangeRed);
@@ -193,5 +194,15 @@ namespace betterlauncher_cs
         private void redirect_releases(object sender, System.Windows.Input.MouseButtonEventArgs e) { ResetVersionsMainLabelColors(); contenthandler_version_handler_base.SelectedIndex = 0; releases_mainlabel.Foreground = new SolidColorBrush(Colors.OrangeRed); }
         private void redirect_snapshots(object sender, System.Windows.Input.MouseButtonEventArgs e) { ResetVersionsMainLabelColors(); contenthandler_version_handler_base.SelectedIndex = 1; snapshots_mainlabel.Foreground = new SolidColorBrush(Colors.OrangeRed); }
         private void redirect_local(object sender, System.Windows.Input.MouseButtonEventArgs e) { ResetVersionsMainLabelColors(); contenthandler_version_handler_base.SelectedIndex = 2; locals_mainlabel.Foreground = new SolidColorBrush(Colors.OrangeRed); }
+
+        private void launch_init(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("clicked");
+            if (BetterLauncher_WantedLaunch != "")
+            {
+                contenthandler.SelectedIndex = 2;
+                MessageBox.Show("redireced");
+            }
+        }
     }
 }
