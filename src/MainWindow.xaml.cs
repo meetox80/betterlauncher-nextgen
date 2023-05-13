@@ -197,12 +197,13 @@ namespace betterlauncher_cs
 
         private void launch_init(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("clicked");
             if (BetterLauncher_WantedLaunch != "")
             {
                 contenthandler.SelectedIndex = 2;
-                MessageBox.Show("redireced");
             }
         }
+
+        private void wnd_close(object sender, System.Windows.Input.MouseButtonEventArgs e) { this.Close(); }
+        private void wnd_minimize(object sender, System.Windows.Input.MouseButtonEventArgs e) { WindowState = WindowState.Minimized; }
     }
 }

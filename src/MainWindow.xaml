@@ -768,8 +768,8 @@
                     </BeginStoryboard>
                 </EventTrigger>
             </StackPanel.Triggers>
-            <Rectangle Height="12" Width="12" Fill="#FFFC5753" RadiusX="8" RadiusY="8" Margin="20,0,0,0" Stroke="#FFDF4744" StrokeThickness="2" />
-            <Rectangle Height="12" Width="12" Fill="#FFFDBC40" RadiusX="8" RadiusY="8" Margin="7.5,0,0,0" Stroke="#FFDE9F34" StrokeThickness="2" />
+            <Rectangle MouseDown="wnd_close" Height="12" Width="12" Fill="#FFFC5753" RadiusX="8" RadiusY="8" Margin="20,0,0,0" Stroke="#FFDF4744" StrokeThickness="2" />
+            <Rectangle MouseDown="wnd_minimize" Height="12" Width="12" Fill="#FFFDBC40" RadiusX="8" RadiusY="8" Margin="7.5,0,0,0" Stroke="#FFDE9F34" StrokeThickness="2" />
             <Rectangle Height="12" Width="12" Fill="#7F113C17" RadiusX="8" RadiusY="8" Margin="7.5,0,0,0" Stroke="#7F0B3710" StrokeThickness="2" />
         </StackPanel>
     </Grid>
