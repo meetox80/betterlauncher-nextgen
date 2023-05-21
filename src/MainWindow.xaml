@@ -8,179 +8,69 @@
         Title="BetterLauncher" Height="720" Width="1280" ResizeMode="NoResize" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Icon="/logo.png" WindowStyle="None" Background="{x:Null}" Initialized="Window_Initialized">
 
     <Window.Resources>
-        <SolidColorBrush x:Key="StandardBorderBrush" Color="#888" />
-        <SolidColorBrush x:Key="StandardBackgroundBrush" Color="Black" />
-        <SolidColorBrush x:Key="HoverBorderBrush" Color="#DDD" />
-        <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="Gray" />
-        <SolidColorBrush x:Key="SelectedForegroundBrush" Color="White" />
-        <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
-        <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
-        <SolidColorBrush x:Key="NormalBrush" Color="#888" />
-        <SolidColorBrush x:Key="NormalBorderBrush" Color="#888" />
-        <SolidColorBrush x:Key="HorizontalNormalBrush" Color="#FF686868" />
-        <SolidColorBrush x:Key="HorizontalNormalBorderBrush" Color="#888" />
-
-        <LinearGradientBrush x:Key="ListBoxBackgroundBrush" StartPoint="0,0" EndPoint="1,0.001">
-            <GradientBrush.GradientStops>
-                <GradientStopCollection>
-                    <GradientStop Color="White" Offset="0.0" />
-                    <GradientStop Color="White" Offset="0.6" />
-                    <GradientStop Color="#DDDDDD" Offset="1.2"/>
-                </GradientStopCollection>
-            </GradientBrush.GradientStops>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="StandardBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientBrush.GradientStops>
-                <GradientStopCollection>
-                    <GradientStop Color="#FFF" Offset="0.0"/>
-                    <GradientStop Color="#CCC" Offset="1.0"/>
-                </GradientStopCollection>
-            </GradientBrush.GradientStops>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="PressedBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientBrush.GradientStops>
-                <GradientStopCollection>
-                    <GradientStop Color="#BBB" Offset="0.0"/>
-                    <GradientStop Color="#EEE" Offset="0.1"/>
-                    <GradientStop Color="#EEE" Offset="0.9"/>
-                    <GradientStop Color="#FFF" Offset="1.0"/>
-                </GradientStopCollection>
-            </GradientBrush.GradientStops>
-        </LinearGradientBrush>
-
-        <Style x:Key="ScrollBarLineButton" TargetType="{x:Type RepeatButton}">
-            <Setter Property="Visibility" Value="Hidden"/>
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Setter Property="Focusable" Value="false"/>
+        <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                        <Border Name="Border" Margin="1" CornerRadius="2" Background="{StaticResource NormalBrush}" BorderBrush="{StaticResource NormalBorderBrush}" BorderThickness="1">
-                            <Path HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{StaticResource GlyphBrush}" Data="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" />
-                        </Border>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid x:Name="Grid">
+                            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Fill="Transparent" />
+                            <Border x:Name="ScrollBarRectangle" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto"  Background="{TemplateBinding Background}" />
+                        </Grid>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter TargetName="Border" Property="Background" Value="{StaticResource PressedBrush}" />
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+                            <Trigger Property="Tag" Value="Horizontal">
+                                <Setter TargetName="ScrollBarRectangle" Property="Width" Value="Auto" />
+                                <Setter TargetName="ScrollBarRectangle" Property="Height" Value="7" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="ScrollBarPageButton" TargetType="{x:Type RepeatButton}">
-            <Setter Property="Visibility" Value="Hidden"/>
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Setter Property="IsTabStop" Value="false"/>
-            <Setter Property="Focusable" Value="false"/>
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Margin" Value="-5,0,0,0" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+            <Setter Property="Foreground" Value="#FF8C8C8C" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="8" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                        <Border Background="Black" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Setter Property="IsTabStop" Value="false"/>
-            <Setter Property="Focusable" Value="false"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Border CornerRadius="4" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0"  Width="8" Margin="8,0,-2,0"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition MaxHeight="0"/>
-                    <RowDefinition Height="0.00001*"/>
-                    <RowDefinition MaxHeight="0"/>
-                </Grid.RowDefinitions>
-                <Border Grid.RowSpan="3" CornerRadius="2" Background="Transparent" />
-                <RepeatButton Grid.Row="0" Style="{StaticResource ScrollBarLineButton}" Height="18" Command="ScrollBar.LineUpCommand" Content="M 0 4 L 8 4 L 4 0 Z" />
-                <Track Name="PART_Track" Grid.Row="1" IsDirectionReversed="true">
-                    <Track.DecreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageUpCommand" />
-                    </Track.DecreaseRepeatButton>
-                    <Track.Thumb>
-                        <Thumb Style="{StaticResource ScrollBarThumb}" Margin="1,0,1,0" Background="{StaticResource HorizontalNormalBrush}" BorderBrush="{StaticResource HorizontalNormalBorderBrush}" />
-                    </Track.Thumb>
-                    <Track.IncreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageDownCommand" />
-                    </Track.IncreaseRepeatButton>
-                </Track>
-                <RepeatButton Grid.Row="3" Style="{StaticResource ScrollBarLineButton}" Height="18" Command="ScrollBar.LineDownCommand" Content="M 0 0 L 4 4 L 8 0 Z"/>
-            </Grid>
-        </ControlTemplate>
-        <ControlTemplate x:Key="HorizontalScrollBar" TargetType="{x:Type ScrollBar}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition MaxWidth="18"/>
-                    <ColumnDefinition Width="0.00001*"/>
-                    <ColumnDefinition MaxWidth="18"/>
-                </Grid.ColumnDefinitions>
-                <Border Grid.ColumnSpan="3" CornerRadius="2" Background="#F0F0F0"/>
-                <RepeatButton Grid.Column="0"  Style="{StaticResource ScrollBarLineButton}" Width="18" Command="ScrollBar.LineLeftCommand" Content="M 4 0 L 4 8 L 0 4 Z" />
-                <Track Name="PART_Track" Grid.Column="1" IsDirectionReversed="False">
-                    <Track.DecreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageLeftCommand" />
-                    </Track.DecreaseRepeatButton>
-                    <Track.Thumb>
-                        <Thumb Style="{StaticResource ScrollBarThumb}" Margin="0,1,0,1" Background="{StaticResource NormalBrush}" BorderBrush="{StaticResource NormalBorderBrush}" />
-                    </Track.Thumb>
-                    <Track.IncreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageRightCommand" />
-                    </Track.IncreaseRepeatButton>
-                </Track>
-                <RepeatButton Grid.Column="3" Style="{StaticResource ScrollBarLineButton}" Width="18" Command="ScrollBar.LineRightCommand" Content="M 0 0 L 4 4 L 0 8 Z"/>
-            </Grid>
-        </ControlTemplate>
-        <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Style.Triggers>
-                <Trigger Property="Orientation" Value="Horizontal">
-                    <Setter Property="Width" Value="Auto"/>
-                    <Setter Property="Height" Value="18" />
-                    <Setter Property="Template" Value="{StaticResource HorizontalScrollBar}" />
-                </Trigger>
-                <Trigger Property="Orientation" Value="Vertical">
-                    <Setter Property="Width" Value="18"/>
-                    <Setter Property="Height" Value="Auto" />
-                    <Setter Property="Template" Value="{StaticResource VerticalScrollBar}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="FavsScrollViewer" TargetType="{x:Type ScrollViewer}">
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <ScrollContentPresenter Grid.Column="1"/>
-                            <ScrollBar Name="PART_VerticalScrollBar" Value="{TemplateBinding VerticalOffset}" Maximum="{TemplateBinding ScrollableHeight}" ViewportSize="{TemplateBinding ViewportHeight}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
-                            <ScrollBar Name="PART_HorizontalScrollBar" Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Value="{TemplateBinding HorizontalOffset}" Maximum="{TemplateBinding ScrollableWidth}" ViewportSize="{TemplateBinding ViewportWidth}" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="GridRoot" Width="8" Background="{TemplateBinding Background}">
+                            <Track x:Name="PART_Track" IsDirectionReversed="true" Focusable="false">
+                                <Track.Thumb>
+                                    <Thumb x:Name="ScrollBarThumb" Background="{TemplateBinding Foreground}" Style="{StaticResource ScrollThumbs}" />
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="false" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="false" />
+                                </Track.DecreaseRepeatButton>
+                            </Track>
                         </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="ScrollBarThumb" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="Orientation" Value="Horizontal">
+                                <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Width" Value="Auto" />
+                                <Setter Property="Height" Value="8" />
+                                <Setter TargetName="ScrollBarThumb" Property="Tag" Value="Horizontal" />
+                                <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
+                                <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -581,7 +471,7 @@
                             <DropShadowEffect Direction="0" BlurRadius="30" ShadowDepth="0" Color="White"/>
                         </Path.Effect>
                     </Path>
-                    <Label x:Name="contenthandler_login_msbutton_text" Margin="805,311,0,311" FontFamily="Segoe UI Black" Foreground="White" Content="Zaloguj się kontem Microsoft" HorizontalAlignment="Left" MouseDown="mslogin_init"/>
+                    <Label x:Name="contenthandler_login_msbutton_text" Margin="805,313,0,309" FontFamily="Segoe UI Black" Foreground="White" Content="Zaloguj się kontem Microsoft" HorizontalAlignment="Left" MouseDown="mslogin_init"/>
 
                     <Rectangle x:Name="contenthandler_login_otherbutton" Margin="799,379,201,232" RadiusX="12" RadiusY="12" Fill="#FF2C2A44">
                         <Rectangle.Effect>
@@ -651,21 +541,21 @@
 
                     <TabControl x:Name="contenthandler_version_handler_base" Margin="602,124,69,73" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" >
                         <TabItem x:Name="contenthandler_version_handler_base_release" Visibility="Collapsed">
-                            <ScrollViewer HorizontalAlignment="Left" Background="Transparent" Width="490" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer HorizontalAlignment="Left" Background="Transparent" Width="465" VerticalScrollBarVisibility="Auto">
                                 <StackPanel x:Name="contenthandler_version_handler_base_release_stackpanel" Background="Transparent" Width="500">
                                     <!-- Programmatically adding Labels for releases -->
                                 </StackPanel>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="contenthandler_version_handler_base_snapshots" Visibility="Hidden">
-                            <ScrollViewer HorizontalAlignment="Left" Background="Transparent" Width="490" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer HorizontalAlignment="Left" Background="Transparent" Width="465" VerticalScrollBarVisibility="Auto">
                                 <StackPanel x:Name="contenthandler_version_handler_base_snapshots_stackpanel" Background="Transparent" Width="500">
                                     <!-- Programmatically adding Labels for snapshots -->
                                 </StackPanel>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem x:Name="contenthandler_version_handler_base_local" Visibility="Hidden">
-                            <ScrollViewer HorizontalAlignment="Left" Background="Transparent" Width="490" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer HorizontalAlignment="Left" Background="Transparent" Width="465" VerticalScrollBarVisibility="Auto">
                                 <StackPanel x:Name="contenthandler_version_handler_base_local_stackpanel" Background="Transparent" Width="500">
                                     <!-- Programmatically adding Labels for local versions -->
                                 </StackPanel>
@@ -675,7 +565,7 @@
 
                     <!-- Right:Highest layer-->
 
-                    <Button x:Name="contenthandler_version_handler_launchbutton" Content="Launch" HorizontalAlignment="Left" Margin="946,548,0,0" VerticalAlignment="Top" Click="launch_init" Height="32" Width="128" Background="{x:Null}" Foreground="White" BorderBrush="#3FFFFFFF" FontFamily="Segoe UI Black">
+                    <Button x:Name="contenthandler_version_handler_launchbutton" Content="Launch" HorizontalAlignment="Left" Margin="946,548,0,0" VerticalAlignment="Top" Click="launch_init" Height="32" Width="128" Background="#FF100F1D" Foreground="White" BorderBrush="#3FFFFFFF" FontFamily="Segoe UI Black">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="8"/>
@@ -705,6 +595,21 @@
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
+                    
+                    <Image Source="/lightning.png" Margin="583,172,-15,153" />
+
+                    <!-- Right side -->
+                    <Button Margin="732,298,134,297" FontFamily="Segoe UI Black" Background="#FF9927BD" BorderBrush="{x:Null}" Foreground="White" Content="Uruchom minecrafta">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Effect>
+                            <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="80" Opacity="0.75" Color="#FFE38DFF"/>
+                        </Button.Effect>
+                    </Button>
+
                 </Grid>
             </TabItem>
 
