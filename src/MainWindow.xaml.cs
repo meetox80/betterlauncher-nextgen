@@ -16,22 +16,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using DiscordRPC;
 using Button = DiscordRPC.Button;
-using System.Windows.Shapes;
 using MessageBox = System.Windows.Forms.MessageBox;
+using System.IO;
+using Path = System.IO.Path;
+using System.Windows.Media.Animation;
+using FontFamily = System.Windows.Media.FontFamily;
+using Rectangle = System.Windows.Shapes.Rectangle;
+using Brushes = System.Windows.Media.Brushes;
+using System.Net;
+using System.ComponentModel;
+using Ionic.Zip;
 
 namespace betterlauncher_cs
 {
     public partial class MainWindow : Window
     {
         #region Variables
-        public static string BetterLauncher_Version = "0.0.0";
+        public static string BetterLauncher_Version = "0.0.5";
         public static string BetterLauncher_MsLoginClientID = "c774e229-39fa-48ea-ad91-b0fb7e75945d";
         public static string BetterLauncher_WantedLaunch = "";
+        MSession BetterLauncher_UserSession;
         #endregion
 
         #region RPC, Window code
         public MainWindow()
         {
+
             // Discord RPC
             DiscordRpcClient client = new DiscordRpcClient("1106998157772075058");
             client.Initialize();
@@ -76,6 +86,7 @@ namespace betterlauncher_cs
 
         private async void Window_Initialized(object sender, EventArgs e)
         {
+            contenthandler_launch_progress_text.Content = "";
             // post-app run lag spike on animations delay
             Thread.Sleep(2500 / Environment.ProcessorCount);
 
@@ -137,6 +148,8 @@ namespace betterlauncher_cs
                 contenthandler_version_playerimage.Source = new BitmapImage(new Uri($"https://crafatar.com/renders/body/{session.UUID}"));
                 contenthandler_version_playerimage_blurred.Source = contenthandler_version_playerimage.Source;
                 contenthandler_version_playernickname.Text = session.Username;
+
+                BetterLauncher_UserSession = session;
             }
 
             var VersionLauncher = new CMLauncher(new MinecraftPath());
@@ -164,7 +177,7 @@ namespace betterlauncher_cs
                     ReleasesLabel.HorizontalAlignment = HorizontalAlignment.Left;
                     ReleasesLabel.FontFamily = new FontFamily("Segoe UI Black");
                     ReleasesLabel.Content = Version.ToString().Split(' ')[1];
-                    ReleasesLabel.MouseDown += redirect_launch_releases;
+                    ReleasesLabel.MouseDown += redirect_launch;
                     contenthandler_version_handler_base_release_stackpanel.Children.Add(ReleasesLabel);
                 }
 
@@ -177,6 +190,7 @@ namespace betterlauncher_cs
                     SnapshotsLabel.HorizontalAlignment = HorizontalAlignment.Left;
                     SnapshotsLabel.FontFamily = new FontFamily("Segoe UI Black");
                     SnapshotsLabel.Content = Version.ToString().Split(' ')[1];
+                    SnapshotsLabel.MouseDown += redirect_launch;
                     contenthandler_version_handler_base_snapshots_stackpanel.Children.Add(SnapshotsLabel);
                 }
 
@@ -189,6 +203,7 @@ namespace betterlauncher_cs
                     LocalsLabel.HorizontalAlignment = HorizontalAlignment.Left;
                     LocalsLabel.FontFamily = new FontFamily("Segoe UI Black");
                     LocalsLabel.Content = Version.ToString().Split(' ')[1];
+                    LocalsLabel.MouseDown += redirect_launch;
                     contenthandler_version_handler_base_local_stackpanel.Children.Add(LocalsLabel);
                 }
             }
@@ -213,7 +228,7 @@ namespace betterlauncher_cs
             locals_mainlabel.Foreground = new SolidColorBrush(Colors.White);
         }
 
-        private void redirect_launch_releases(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void redirect_launch(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             foreach (var child in contenthandler_version_handler_base_release_stackpanel.Children)
             {
@@ -255,6 +270,177 @@ namespace betterlauncher_cs
         private void wnd_close_leave(object sender, MouseEventArgs e)  { Rectangle rect = (Rectangle)sender; rect.Opacity = 1.0f; }
         private void wnd_minimize_enter(object sender, MouseEventArgs e) { Rectangle rect = (Rectangle)sender; rect.Opacity = 0.5f; }
         private void wnd_minimize_leave(object sender, MouseEventArgs e) { Rectangle rect = (Rectangle)sender; rect.Opacity = 1.0f; }
+        #endregion
+
+        #region Launching
+
+        public static bool BetterLauncher_IsLaunching;
+
+        async private void LaunchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (BetterLauncher_IsLaunching != true)
+            {
+                BetterLauncher_IsLaunching = true;
+                contenthandler_launch_launchbutton.Opacity = 0.5;
+
+                if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".betterlauncher-cs")))
+                {
+                    Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".betterlauncher-cs"));
+                }
+                contenthandler_launch_progress_bar_Animation(-1, -1, true);
+
+                // get java
+                if (!File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".betterlauncher-cs" + @"\java.zip")))
+                {
+                    WebClient JavaDownloadWebClient = new WebClient();
+                    JavaDownloadWebClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Launch_ChangeProgressBar);
+                    JavaDownloadWebClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Launch_Unzip);
+                    JavaDownloadWebClient.DownloadFileAsync(new Uri("https://download.bell-sw.com/java/17.0.7+7/bellsoft-jdk17.0.7+7-windows-amd64-lite.zip"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".betterlauncher-cs" + @"\java.zip"));
+                }
+                else
+                {
+                    Launch_Unzip(null, null);
+                }
+            }   
+        }
+
+        private async void Launch_Unzip(object sender, AsyncCompletedEventArgs e)
+        {
+            var JavaPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".betterlauncher-cs" + @"\jdk-17.0.7-lite\bin\javaw.exe");
+
+            // unzip java
+            if (!File.Exists(JavaPath))
+            {
+                contenthandler_launch_progress_text.Content = "Unzipping Java.";
+                using (ZipFile zip = ZipFile.Read(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".betterlauncher-cs" + @"\java.zip").ToString()))
+                {
+                    zip.ExtractAll(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".betterlauncher-cs").ToString());
+                    zip.ExtractProgress += Launch_ExtractProgress;
+                }
+            }
+
+            contenthandler_launch_progress_bar_Animation(-1, -1, true);
+            contenthandler_launch_progress_text.Content = "Launching minecraft.";
+            MVersion version = new MVersion(BetterLauncher_WantedLaunch);
+
+            var launchOption = new MLaunchOption()
+            {
+                StartVersion = version,
+                Session = BetterLauncher_UserSession,
+
+                Path = new MinecraftPath(),
+                MaximumRamMb = 4096,
+                JavaPath = JavaPath,
+                JVMArguments = new string[] { },
+
+                ScreenWidth = 800,
+                ScreenHeight = 600,
+
+                VersionType = "BetterLauncher",
+                GameLauncherName = "BetterLauncher",
+                GameLauncherVersion = "2",
+
+                FullScreen = false,
+
+                // Only macOS
+                DockName = "",
+                DockIcon = "",
+            };
+
+            System.Net.ServicePointManager.DefaultConnectionLimit = 256;
+
+            var path = new MinecraftPath();
+            var launcher = new CMLauncher(path);
+            launcher.ProgressChanged += Launcher_ProgressChanged;
+            launcher.FileChanged += Launcher_FileChanged;
+
+            // testing
+            // var versionlist = await launcher.GetAllVersionsAsync();
+            // foreach (var v in versionlist)
+            // {
+            //     Console.WriteLine(v.Name);
+            // }
+
+            var process = await launcher.CreateProcessAsync(BetterLauncher_WantedLaunch, launchOption);
+            process.Start();
+
+            this.Close();
+        }
+
+        private int LaunchPercent;
+
+        private void Launcher_FileChanged(CmlLib.Core.Downloader.DownloadFileChangedEventArgs e)
+        {
+            contenthandler_launch_progress_text.Content = $"Downloading Minecraft: {LaunchPercent}%" + $" - {e.FileName} @ [{e.ProgressedFileCount}/{e.TotalFileCount}]";
+
+            contenthandler_launch_progress_bar_Animation(LaunchPercent * 11, 2, false);
+        }
+
+        private void Launcher_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            LaunchPercent = (int)e.ProgressPercentage;
+        }
+
+        private void Launch_ExtractProgress(object sender, ExtractProgressEventArgs e)
+        {
+            int PercentCompleted = (int)((e.BytesTransferred * 100) / e.TotalBytesToTransfer);
+            int progressBarWidth_Percent = PercentCompleted * 11;
+            contenthandler_launch_progress_text.Content = $"Extracting java {PercentCompleted}%";
+            contenthandler_launch_progress_bar_Animation(progressBarWidth_Percent, 2, false);
+        }
+
+        private void Launch_ChangeProgressBar(object sender, DownloadProgressChangedEventArgs e)
+        {
+            int progressBarWidth = 24 + (int)(((double)e.BytesReceived / e.TotalBytesToReceive) * (1100 - 24));
+            int progressBarWidth_Percent = 0 + (int)(((double)e.BytesReceived / e.TotalBytesToReceive) * (100 - 0));
+            contenthandler_launch_progress_text.Content = $"Downloading java {progressBarWidth_Percent}% [{e.BytesReceived / (1024 * 1024)}Mb/{e.TotalBytesToReceive / (1024 * 1024)}Mb]";
+            contenthandler_launch_progress_bar_Animation(progressBarWidth, 2, false);
+        }
+
+        private void contenthandler_launch_progress_bar_Animation(int Size, int IncreaseOrDecrease, bool ResetState)
+        {
+            double initialWidth = contenthandler_launch_progress_bar.Width;
+
+            // default if IncreaseOrDecrease is wrong
+            double finalWidth = 24;
+
+            if (Size != -1 && IncreaseOrDecrease != -1 && ResetState == false)
+            {
+                if (IncreaseOrDecrease == 0)
+                {
+                    // State:Add
+                    finalWidth = initialWidth + Size;
+                }
+                else if (IncreaseOrDecrease == 1)
+                {
+                    // State:Remove
+                    finalWidth = initialWidth - Size;
+                } 
+                else if (IncreaseOrDecrease == 2)
+                {
+                    // State:Set
+                    finalWidth = Size;
+                }
+            } else if (ResetState == true)
+            {
+                finalWidth = 24;
+            }
+
+            TimeSpan duration = TimeSpan.FromSeconds(0.5);
+
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                From = initialWidth,
+                To = finalWidth,
+                Duration = new Duration(duration),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            // Attach the completed event handler if needed ale ni chuja narazie nie trza
+            // animation.Completed += AnimationCompleted;
+
+            contenthandler_launch_progress_bar.BeginAnimation(FrameworkElement.WidthProperty, animation);
+        }
         #endregion
     }
 }

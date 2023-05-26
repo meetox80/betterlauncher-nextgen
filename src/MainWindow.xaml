@@ -595,11 +595,11 @@
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
-                    
+
                     <Image Source="/lightning.png" Margin="583,172,-15,153" />
 
                     <!-- Right side -->
-                    <Button Margin="732,298,134,297" FontFamily="Segoe UI Black" Background="#FF9927BD" BorderBrush="{x:Null}" Foreground="White" Content="Uruchom minecrafta">
+                    <Button x:Name="contenthandler_launch_launchbutton" Margin="732,298,134,297" FontFamily="Segoe UI Black" Background="#FF9927BD" BorderBrush="{x:Null}" Foreground="White" Content="Uruchom minecrafta" Click="LaunchButton_Click">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="12"/>
@@ -610,6 +610,9 @@
                         </Button.Effect>
                     </Button>
 
+                    <Rectangle x:Name="contenthandler_launch_progress_bg" Height="24" RadiusX="12" RadiusY="12" Fill="#FF0D0D13" Width="1100" Margin="21,615,17,14"/>
+                    <Rectangle x:Name="contenthandler_launch_progress_bar" Height="24" RadiusX="12" RadiusY="12" Fill="#FF9927BD" Width="24" Margin="21,615,17,14"/>
+                    <Label x:Name="contenthandler_launch_progress_text" FontFamily="Segoe UI Black" Foreground="White" Margin="22,590,340,35" Content="Reticulating Splines..." />
                 </Grid>
             </TabItem>
 
