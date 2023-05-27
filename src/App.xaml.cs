@@ -9,7 +9,7 @@ using System.Windows;
 namespace betterlauncher_cs
 {
     /// <summary>
-    /// Logika interakcji dla klasy App.xaml
+    /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
