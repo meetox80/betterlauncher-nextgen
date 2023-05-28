@@ -23,8 +23,14 @@ jobs:
     - name: Test directory - src/bin/release
       run: dir src/bin/Release/
 
+    - name: Get file size
+      id: get_file_size
+      run: |
+        $size = (Get-ChildItem -Path "src/bin/Release/betterlauncher-cs.exe" | Measure-Object -Property Length -Sum).Sum / 1KB
+        echo "::set-output name=size_kb::$size"
+        
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: BetterLauncher_CSHARP_${{ github.run_id }}
+        name: BetterLauncher_${{ github.run_id }}_${{ steps.get_file_size.outputs.size_kb }}kb
         path: src/bin/Release/betterlauncher-cs.exe
