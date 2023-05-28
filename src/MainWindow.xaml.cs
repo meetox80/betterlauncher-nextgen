@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using Microsoft.Win32;
+using System;
+using System.Runtime.InteropServices;
+using System.Windows;
 
 namespace betterlauncher_cs
 {
@@ -9,8 +12,27 @@ namespace betterlauncher_cs
             InitializeComponent();
         }
 
+        private void SetMonitorScaleTo100Percent()
+        {
+            const string dpiRegistryPath = @"HKEY_CURRENT_USER\Control Panel\Desktop";
+            const string dpiRegistryValue = "LogPixels";
+            const int WM_DISPLAYCHANGE = 0x007E;
+            const int HWND_BROADCAST = 0xFFFF;
+
+            // Set the DPI value to 96 (100% scale)
+            Registry.SetValue(dpiRegistryPath, dpiRegistryValue, 96, RegistryValueKind.DWord);
+
+            // Notify the system of the DPI change
+            SendMessage((IntPtr)HWND_BROADCAST, WM_DISPLAYCHANGE, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
         private void Window_Initialized(object sender, System.EventArgs e)
         {
+            SetMonitorScaleTo100Percent();
+
             windowhandler_bg.Height = 20; windowhandler_bg.Width = 20;
             windowhandler_mask1.Height = 20; windowhandler_mask1.Width = 20;
             windowhandler_mask2.Height = 20; windowhandler_mask2.Width = 20;

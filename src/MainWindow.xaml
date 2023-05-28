@@ -617,5 +617,16 @@
                 </EventTrigger>
             </Label.Triggers>
         </Label>
+        
+        
+        <!-- Profile section -->
+
+        <Rectangle x:Name="profile_handler" Fill="#3F000000" RadiusX="10" RadiusY="10" Height="50" Width="175" Margin="1132,158,193,692"/>
+        <Rectangle x:Name="profile_image" Height="50" Width="50" Margin="1132,158,318,692" RadiusX="7.5" RadiusY="7.5">
+            <Rectangle.Fill>
+                <ImageBrush x:Name="profile_image_imagebrush" ImageSource="https://mc-heads.net/avatar/-"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <TextBlock Text="Click to login" FontFamily="Fonts/#Proxima Nova" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="1182,168,193,704" />
     </Grid>
 </Window>

@@ -2,6 +2,7 @@
   <img width="100%" src="https://github.com/lemonekq/betterlauncher-nextgen/blob/main/branding/1.png?raw=true">
   <img width="100%" src="https://github.com/lemonekq/betterlauncher-nextgen/blob/main/branding/2.png?raw=true">
   <img width="100%" src="https://github.com/lemonekq/betterlauncher-nextgen/blob/main/branding/bottom_after.png?raw=true">
+  <img width="100%" src="https://github.com/lemonekq/betterlauncher-nextgen/blob/main/branding/disclaimer.png?raw=true">
 </p>
 
 <!-- desc, etc... -->
