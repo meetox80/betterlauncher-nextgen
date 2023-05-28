@@ -32,5 +32,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: BetterLauncher_CSHARP_${{ github.run_id }}_${{ steps.get_file_size.outputs.size_kb }}kb
+        name: BetterLauncher_${{ github.run_id }}_${{ steps.get_file_size.outputs.size_kb }}kb
         path: src/bin/Release/betterlauncher-cs.exe
