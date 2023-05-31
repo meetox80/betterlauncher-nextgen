@@ -20,17 +20,17 @@ jobs:
     - name: Build project
       run: msbuild.exe /t:build /p:Configuration=Release /p:Platform="Any CPU" /p:OutputPath="bin/Release/" src/betterlauncher-nextgen/betterlauncher-nextgen.csproj
 
-    - name: Test directory - src/bin/release
+    - name: Test directory - src/betterlauncher-nextgen/bin/release
       run: dir src/betterlauncher-nextgen/bin/Release/
 
     - name: Get file size
       id: get_file_size
       run: |
-        $size = (Get-ChildItem -Path "src/betterlauncher-nextgen/bin/Release/betterlauncher-cs.exe" | Measure-Object -Property Length -Sum).Sum / 1KB
+        $size = (Get-ChildItem -Path "src/betterlauncher-nextgen/bin/Release/betterlauncher-nextgen.exe" | Measure-Object -Property Length -Sum).Sum / 1KB
         echo "::set-output name=size_kb::$size"
         
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: BetterLauncher_${{ github.run_id }}_${{ steps.get_file_size.outputs.size_kb }}kb
-        path: src/bin/Release/betterlauncher-nextgen.exe
+        path: src/betterlauncher-nextgen/bin/Release/betterlauncher-nextgen.exe
