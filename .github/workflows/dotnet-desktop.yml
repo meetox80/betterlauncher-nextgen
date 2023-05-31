@@ -15,7 +15,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.3
 
     - name: Restore NuGet packages
-      run: nuget restore src/betterlauncher-cs.sln
+      run: nuget restore src/betterlauncher-nextgen/betterlauncher-nextgen.sln
 
     - name: Build project
       run: msbuild.exe /t:build /p:Configuration=Release /p:Platform="Any CPU" /p:OutputPath="bin/Release/" src/betterlauncher-nextgen/betterlauncher-nextgen.csproj
