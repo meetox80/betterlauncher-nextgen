@@ -18,15 +18,15 @@ jobs:
       run: nuget restore src/betterlauncher-cs.sln
 
     - name: Build project
-      run: msbuild.exe /t:build /p:Configuration=Release /p:Platform="Any CPU" /p:OutputPath="bin/Release/" src/betterlauncher-cs.csproj
+      run: msbuild.exe /t:build /p:Configuration=Release /p:Platform="Any CPU" /p:OutputPath="bin/Release/" src/betterlauncher-nextgen/betterlauncher-cs.csproj
 
     - name: Test directory - src/bin/release
-      run: dir src/bin/Release/
+      run: dir src/betterlauncher-nextgen/bin/Release/
 
     - name: Get file size
       id: get_file_size
       run: |
-        $size = (Get-ChildItem -Path "src/bin/Release/betterlauncher-cs.exe" | Measure-Object -Property Length -Sum).Sum / 1KB
+        $size = (Get-ChildItem -Path "src/betterlauncher-nextgen/bin/Release/betterlauncher-cs.exe" | Measure-Object -Property Length -Sum).Sum / 1KB
         echo "::set-output name=size_kb::$size"
         
     - name: Upload artifacts
