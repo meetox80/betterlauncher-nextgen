@@ -377,7 +377,7 @@
             <Border CornerRadius="20,20,20,20">
                 <Grid Height="100" Width="225">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Image x:Name="launchbutton_triangles_image_1" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.25" Margin="5,0,5,0">
+                        <Image x:Name="launchbutton_triangles_image_1" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.15" Margin="5,0,5,0">
                             <Image.Resources>
                                 <Storyboard x:Key="ImageLoopStoryboard" RepeatBehavior="Forever">
                                     <DoubleAnimation BeginTime="00:00:0.5" Storyboard.TargetName="launchbutton_triangles_image_1" Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" From="70" To="-70" Duration="0:0:2">
@@ -396,7 +396,7 @@
                                 </EventTrigger>
                             </Image.Triggers>
                         </Image>
-                        <Image x:Name="launchbutton_triangles_image_2" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.25" Margin="5,0,5,0">
+                        <Image x:Name="launchbutton_triangles_image_2" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.15" Margin="5,0,5,0">
                             <Image.Resources>
                                 <Storyboard x:Key="ImageLoopStoryboard" RepeatBehavior="Forever">
                                     <DoubleAnimation BeginTime="00:00:01.5" Storyboard.TargetName="launchbutton_triangles_image_2" Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" From="70" To="-70" Duration="0:0:2">
@@ -415,7 +415,7 @@
                                 </EventTrigger>
                             </Image.Triggers>
                         </Image>
-                        <Image x:Name="launchbutton_triangles_image_3" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.25" Margin="5,0,5,0">
+                        <Image x:Name="launchbutton_triangles_image_3" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.15" Margin="5,0,5,0">
                             <Image.Resources>
                                 <Storyboard x:Key="ImageLoopStoryboard" RepeatBehavior="Forever">
                                     <DoubleAnimation BeginTime="00:00:04.5" Storyboard.TargetName="launchbutton_triangles_image_3" Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" From="70" To="-70" Duration="0:0:2">
@@ -434,7 +434,7 @@
                                 </EventTrigger>
                             </Image.Triggers>
                         </Image>
-                        <Image x:Name="launchbutton_triangles_image_4" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.25" Margin="5,0,5,0">
+                        <Image x:Name="launchbutton_triangles_image_4" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.15" Margin="5,0,5,0">
                             <Image.Resources>
                                 <Storyboard x:Key="ImageLoopStoryboard" RepeatBehavior="Forever">
                                     <DoubleAnimation BeginTime="00:00:07.5" Storyboard.TargetName="launchbutton_triangles_image_4" Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" From="70" To="-70" Duration="0:0:2">
@@ -453,7 +453,7 @@
                                 </EventTrigger>
                             </Image.Triggers>
                         </Image>
-                        <Image x:Name="launchbutton_triangles_image_5" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.25" Margin="5,0,5,0">
+                        <Image x:Name="launchbutton_triangles_image_5" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.15" Margin="5,0,5,0">
                             <Image.Resources>
                                 <Storyboard x:Key="ImageLoopStoryboard" RepeatBehavior="Forever">
                                     <DoubleAnimation BeginTime="00:00:04.5" Storyboard.TargetName="launchbutton_triangles_image_5" Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" From="70" To="-70" Duration="0:0:2">
@@ -472,7 +472,7 @@
                                 </EventTrigger>
                             </Image.Triggers>
                         </Image>
-                        <Image x:Name="launchbutton_triangles_image_6" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.5" Margin="5,0,5,0">
+                        <Image x:Name="launchbutton_triangles_image_6" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.15" Margin="5,0,5,0">
                             <Image.Resources>
                                 <Storyboard x:Key="ImageLoopStoryboard" RepeatBehavior="Forever">
                                     <DoubleAnimation Storyboard.TargetName="launchbutton_triangles_image_6" Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" From="50" To="-70" Duration="0:0:2">
@@ -491,7 +491,7 @@
                                 </EventTrigger>
                             </Image.Triggers>
                         </Image>
-                        <Image x:Name="launchbutton_triangles_image_7" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.25" Margin="5,0,5,0">
+                        <Image x:Name="launchbutton_triangles_image_7" Source="Resources/triangle.png" Height="24" Width="24" Stretch="Fill" Opacity="0.15" Margin="5,0,5,0">
                             <Image.Resources>
                                 <Storyboard x:Key="ImageLoopStoryboard" RepeatBehavior="Forever">
                                     <DoubleAnimation BeginTime="00:00:03.5" Storyboard.TargetName="launchbutton_triangles_image_7" Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" From="50" To="-70" Duration="0:0:2">
