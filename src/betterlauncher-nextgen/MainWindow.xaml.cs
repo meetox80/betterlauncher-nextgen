@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 
 namespace betterlauncher_nextgen
 {
@@ -27,7 +25,9 @@ namespace betterlauncher_nextgen
             launchbutton.Opacity = 0.0f;
             seasonhandler_2_0.Opacity = 0.0f;
             seasonhandler_title.Opacity = 0.0f;
-            
+            seasonhandler_linkrect_github.Opacity = 0.0f;
+            versionhandler_settings.Opacity = 0.0f;
+
             rotatebg();
         }
         public void rotatebg()

@@ -96,6 +96,7 @@
     </EmbeddedResource>
     <Resource Include="Fonts\ProximaNova.ttf" />
     <Resource Include="Fonts\Poppins Light\Poppins-Light.ttf" />
+    <Resource Include="Fonts\Poppins Medium\Poppins-Medium.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
