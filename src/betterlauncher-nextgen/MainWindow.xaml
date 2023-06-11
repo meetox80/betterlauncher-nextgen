@@ -8,6 +8,75 @@
         Title="BetterLauncher" Width="1200" Height="700" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" Foreground="White" Loaded="Window_Loaded" Icon="/logo.ico">
 
     <Window.Resources>
+        <!-- Scroll -->
+        <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid x:Name="Grid">
+                            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Fill="Transparent" />
+                            <Border x:Name="ScrollBarRectangle" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto"  Background="{TemplateBinding Background}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Tag" Value="Horizontal">
+                                <Setter TargetName="ScrollBarRectangle" Property="Width" Value="Auto" />
+                                <Setter TargetName="ScrollBarRectangle" Property="Height" Value="7" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Margin" Value="-5,0,0,0" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+            <Setter Property="Foreground" Value="#FF8C8C8C" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="GridRoot" Width="8" Background="{TemplateBinding Background}">
+                            <Track x:Name="PART_Track" IsDirectionReversed="true" Focusable="false">
+                                <Track.Thumb>
+                                    <Thumb x:Name="ScrollBarThumb" Background="{TemplateBinding Foreground}" Style="{StaticResource ScrollThumbs}" />
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="false" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="false" />
+                                </Track.DecreaseRepeatButton>
+                            </Track>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="ScrollBarThumb" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="Orientation" Value="Horizontal">
+                                <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Width" Value="Auto" />
+                                <Setter Property="Height" Value="8" />
+                                <Setter TargetName="ScrollBarThumb" Property="Tag" Value="Horizontal" />
+                                <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
+                                <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- Remove that blue shit from button :> -->
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -273,7 +342,40 @@
                 </EventTrigger>
             </Rectangle.Triggers>
         </Rectangle>
-        
+
+        <ScrollViewer HorizontalAlignment="Left" Height="491" Margin="50,68,0,0" VerticalAlignment="Top" Width="250" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="versionhandler_stackpanel" Margin="0,10,0,0">
+                <Grid Height="35" Width="200" Margin="0,20,0,0">
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="25" Opacity="0.15"/>
+                    </Grid.Effect>
+                    <Rectangle Fill="#FFE5E8EC" RadiusX="7.5" RadiusY="7.5"></Rectangle>
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock TextAlignment="Center" Width="200" VerticalAlignment="Center" FontFamily="/Fonts/#Proxima Nova" Text="1.19" Foreground="#FF444444"></TextBlock>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Rectangle Margin="50,291,900,141" IsHitTestVisible="False">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#00E6ECF2"/>
+                    <GradientStop Color="#FFF2F2F1" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+
+        <Rectangle Margin="50,77,916,345" IsHitTestVisible="False">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#00F8FAFC" Offset="1"/>
+                    <GradientStop Color="#7FE6ECF2"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
         <Button Width="200" Cursor="Hand" Height="50" x:Name="versionhandler_settings" Margin="75,585,925,65" Background="#05000000" BorderBrush="#26000000" >
 
             <StackPanel Orientation="Horizontal">
@@ -289,7 +391,7 @@
                 </Path>
                 <Label Content="Settings" FontFamily="Fonts/Poppins Medium/#Poppins Medium" Foreground="#BF000000" />
             </StackPanel>
-            
+
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -310,7 +412,7 @@
                                 </DoubleAnimation>
                             </Storyboard>
                         </Storyboard>
-                    </BeginStoryboard> 
+                    </BeginStoryboard>
                 </EventTrigger>
 
                 <EventTrigger RoutedEvent="Button.MouseEnter">
@@ -446,7 +548,7 @@
             </Rectangle.Triggers>
         </Rectangle>
 
-        <Button IsHitTestVisible="True" Cursor="Hand" Opacity="0.75" Height="40" Width="90" x:Name="seasonhandler_linkrect_github" Foreground="White" Background="#59FFFFFF" Margin="1048,472,62,188" RenderTransformOrigin="0.5,0.5">
+        <Button IsHitTestVisible="True" Cursor="Hand" Opacity="0.75" Height="40" Width="90" x:Name="seasonhandler_linkrect_github" Foreground="White" Background="#59FFFFFF" Margin="1048,472,62,188" RenderTransformOrigin="0.5,0.5" Click="seasonhandler_linkrect_github_Click">
 
             <StackPanel Orientation="Horizontal">
                 <Path Stretch="Fill" Height="16" Fill="White" Width="16" Data="M80 104a24 24 0 1 0 0-48 24 24 0 1 0 0 48zm80-24c0 32.8-19.7 61-48 73.3v87.8c18.8-10.9 40.7-17.1 64-17.1h96c35.3 0 64-28.7 64-64v-6.7C307.7 141 288 112.8 288 80c0-44.2 35.8-80 80-80s80 35.8 80 80c0 32.8-19.7 61-48 73.3V160c0 70.7-57.3 128-128 128H176c-35.3 0-64 28.7-64 64v6.7c28.3 12.3 48 40.5 48 73.3c0 44.2-35.8 80-80 80s-80-35.8-80-80c0-32.8 19.7-61 48-73.3V352 153.3C19.7 141 0 112.8 0 80C0 35.8 35.8 0 80 0s80 35.8 80 80zm232 0a24 24 0 1 0 -48 0 24 24 0 1 0 48 0zM80 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" Margin="5,0,5,0"></Path>

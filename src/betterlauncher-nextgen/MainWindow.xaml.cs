@@ -1,7 +1,15 @@
-﻿using System;
+﻿using CmlLib.Core;
+using CmlLib.Core.Version;
+using CmlLib.Core.VersionMetadata;
+using System;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace betterlauncher_nextgen
 {
@@ -9,6 +17,7 @@ namespace betterlauncher_nextgen
     {
         #region Variables
         public static int BackgroundCount = 2;
+        public static string version = "0.0.0";
         #endregion
 
         public MainWindow()
@@ -16,7 +25,7 @@ namespace betterlauncher_nextgen
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             handler_bg.Height = 50; handler_bg.Width = 50; handler_bg_rotatetransform.Angle = 90; handler_bg.Margin = new Thickness(0, 250, 0, 0); handler_bg.Opacity = 0.0f;
             handler_bg_mask.Height = 50; handler_bg_mask.Width = 50; handler_bg_mask_rotatetransform.Angle = 90; handler_bg_mask.Margin = new Thickness(0, 250, 0, 0); handler_bg_mask.Opacity = 0.0f;
@@ -27,8 +36,61 @@ namespace betterlauncher_nextgen
             seasonhandler_title.Opacity = 0.0f;
             seasonhandler_linkrect_github.Opacity = 0.0f;
             versionhandler_settings.Opacity = 0.0f;
+            ConfigManager.EnsureConfig();
 
             rotatebg();
+
+            // get minecraft versions
+            var launcher = new CMLauncher(new MinecraftPath());
+            MVersionCollection versions = launcher.GetAllVersions();
+
+            string SupportedVersions = ConfigManager.GetKey("ShowVersions");
+            string[] supportedVersionsArray = SupportedVersions.Split(',');
+            foreach (MVersionMetadata ver in versions)
+            {
+                foreach (string supportedVersion in supportedVersionsArray)
+                {
+                    if (ver.ToString().Contains(supportedVersion.Trim()))
+                    {
+                        // add element
+                        Grid VersionGrid = new Grid();
+                        DropShadowEffect dropShadowEffect = new DropShadowEffect { BlurRadius = 25, Opacity = 0.15 };
+                        VersionGrid.Effect = dropShadowEffect;
+                        VersionGrid.Width = 200;
+                        VersionGrid.Margin = new Thickness(0, 20, 0, 0);
+                        VersionGrid.Height = 35;
+
+                        Rectangle VersionRectangle = new Rectangle();
+                        VersionRectangle.RadiusX = 7.5f; VersionRectangle.RadiusY = 7.5f;
+                        VersionRectangle.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE5E8EC"));
+
+                        StackPanel VersionStackPanel = new StackPanel();
+                        VersionStackPanel.Orientation = Orientation.Horizontal; VersionStackPanel.VerticalAlignment = VerticalAlignment.Center;
+
+                        TextBlock VersionTextBlock = new TextBlock();
+                        VersionTextBlock.Text = ver.Name;
+                        VersionTextBlock.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Proxima Nova");
+                        VersionTextBlock.TextAlignment = TextAlignment.Center;
+                        VersionTextBlock.Width = 200;
+                        VersionTextBlock.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF444444"));
+
+                        VersionStackPanel.Children.Add(VersionTextBlock);
+                        VersionGrid.Children.Add(VersionRectangle);
+                        VersionGrid.Children.Add(VersionStackPanel);
+                        versionhandler_stackpanel.Children.Add(VersionGrid);
+
+                        // fix the 1st and last element margin
+                        if (versionhandler_stackpanel.Children.Count > 0)
+                        {
+                            UIElement firstElement = versionhandler_stackpanel.Children[0];
+                            if (firstElement is FrameworkElement frameworkElement)
+                            {
+                                frameworkElement.Margin = new Thickness(0, 0, 0, 0);
+                            }
+                        }
+                    }
+                }
+            }
         }
         public void rotatebg()
         {
@@ -57,5 +119,7 @@ namespace betterlauncher_nextgen
                 this.DragMove();
             }
         }
+
+        private void seasonhandler_linkrect_github_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo { FileName = "https://github.com/lemonekq/betterlauncher-nextgen", UseShellExecute = true });
     }
 }
