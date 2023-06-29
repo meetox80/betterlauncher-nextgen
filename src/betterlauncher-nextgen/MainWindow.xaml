@@ -305,7 +305,7 @@
         </Rectangle>
 
         <!-- Elements -->
-        <Rectangle x:Name="versionhandler" Height="600" Width="250" RadiusX="20" RadiusY="20" Margin="50,50,900,50" >
+        <Rectangle x:Name="versionhandler" Width="250" RadiusX="20" RadiusY="20" Margin="50,50,900,40" >
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFE6ECF2"/>
@@ -343,40 +343,99 @@
             </Rectangle.Triggers>
         </Rectangle>
 
-        <ScrollViewer HorizontalAlignment="Left" Height="491" Margin="50,68,0,0" VerticalAlignment="Top" Width="250" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="versionhandler_stackpanel_scrollviewer" HorizontalAlignment="Left" Height="491" Margin="50,68,0,0" VerticalAlignment="Top" Width="250" VerticalScrollBarVisibility="Auto">
             <StackPanel x:Name="versionhandler_stackpanel" Margin="0,10,0,0">
-                <Grid Height="35" Width="200" Margin="0,20,0,0">
-                    <Grid.Effect>
+                <!--
+                
+                <Button Width="200" Height="35" Margin="0,20,0,0" Foreground="#FF444444" Background="#FFE5E8EC" FontFamily="Fonts/#Proxima Nova" Content="1.20" Cursor="Hand">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="7.5"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Effect>
                         <DropShadowEffect BlurRadius="25" Opacity="0.15"/>
-                    </Grid.Effect>
-                    <Rectangle Fill="#FFE5E8EC" RadiusX="7.5" RadiusY="7.5"></Rectangle>
-                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                        <TextBlock TextAlignment="Center" Width="200" VerticalAlignment="Center" FontFamily="/Fonts/#Proxima Nova" Text="1.19" Foreground="#FF444444"></TextBlock>
-                    </StackPanel>
-                </Grid>
+                    </Button.Effect>
+                </Button>
+                
+                -->
             </StackPanel>
+
+            <ScrollViewer.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="versionhandler_stackpanel_scrollviewer_in_opacity">
+                                <DoubleAnimation From="0" To="1" Duration="00:00:0.50" BeginTime="00:00:01.35"
+                                    Storyboard.TargetName="versionhandler_stackpanel_scrollviewer" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </ScrollViewer.Triggers>
         </ScrollViewer>
 
-        <Rectangle Margin="50,291,900,141" IsHitTestVisible="False">
+        <Rectangle x:Name="versionhandler_blend_bottom" Margin="50,410,900,141" IsHitTestVisible="False" Opacity="0.75">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#00E6ECF2"/>
                     <GradientStop Color="#FFF2F2F1" Offset="1"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
+
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="versionhandler_blend_bottom_in_opacity">
+                                <DoubleAnimation From="0" To="1" Duration="00:00:0.50" BeginTime="00:00:01.35"
+                                    Storyboard.TargetName="versionhandler_blend_bottom" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Rectangle.Triggers>
         </Rectangle>
 
 
-        <Rectangle Margin="50,77,916,345" IsHitTestVisible="False">
+        <Rectangle x:Name="versionhandler_blend_top" Margin="50,55,900,367" IsHitTestVisible="False" RadiusX="28" RadiusY="28">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#00F8FAFC" Offset="1"/>
                     <GradientStop Color="#7FE6ECF2"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
+
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="versionhandler_blend_top_in_opacity">
+                                <DoubleAnimation From="0" To="1" Duration="00:00:0.50" BeginTime="00:00:01.35"
+                                    Storyboard.TargetName="versionhandler_blend_top" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Rectangle.Triggers>
         </Rectangle>
 
-        <Button Width="200" Cursor="Hand" Height="50" x:Name="versionhandler_settings" Margin="75,585,925,65" Background="#05000000" BorderBrush="#26000000" >
+        <Button Width="200" Cursor="Hand" Height="50" x:Name="versionhandler_settings" Margin="75,585,925,65" Background="#05000000" BorderBrush="#26000000" Click="versionhandler_settings_Click" >
 
             <StackPanel Orientation="Horizontal">
                 <Path x:Name="versionhandler_settings_gear" Height="16" Width="16" Fill="#7F000000" Stretch="Fill" Data="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z" Margin="0,0,10,0" RenderTransformOrigin="0.5,0.5">
@@ -547,6 +606,139 @@
                 </EventTrigger>
             </Rectangle.Triggers>
         </Rectangle>
+
+        <Button Cursor="Hand" x:Name="accountswitcher_button" Height="45" Width="150" Background="#7FFFFFFF" Margin="988,68,62,582" RenderTransformOrigin="0.5,0.5" Click="accountswitcher_button_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="accountswitcher_button_scaletransform" ScaleX="1" ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+
+            <Grid>
+                <Rectangle Height="45" Width="45" RadiusX="10" RadiusY="10" Margin="-105, 0, 0, 0">
+                    <Rectangle.Effect>
+                        <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="60" Color="White" RenderingBias="Performance"/>
+                    </Rectangle.Effect>
+                    <Rectangle.Fill>
+                        <ImageBrush x:Name="accountswitcher_button_imagesource" ImageSource="https://crafatar.com/avatars/853c80ef3c3749fdaa49938b674adae6?size=100"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <TextBlock FontSize="10" TextAlignment="Center" Text="none" FontFamily="/Fonts/#Proxima Nova" Margin="-30,17,-74,15" Foreground="#CC000000" ></TextBlock>
+            </Grid>
+
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="accountswitcher_button_in_opacity">
+                                <DoubleAnimation From="0" To="1" Duration="00:00:0.50" BeginTime="00:00:01.15"
+                                    Storyboard.TargetName="accountswitcher_button" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="accountswitcher_button_in_move">
+                                <ThicknessAnimation From="988,80,62,582" To="988,68,62,582" Duration="00:00:0.50" BeginTime="00:00:01.15"
+                                    Storyboard.TargetName="accountswitcher_button" 
+                                    Storyboard.TargetProperty="Margin">
+                                    <ThicknessAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </ThicknessAnimation.EasingFunction>
+                                </ThicknessAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="Button.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="accountswitcher_button_in_scalex">
+                                <DoubleAnimation From="1" To="1.1" Duration="00:00:0.50" BeginTime="00:00:00"
+                                    Storyboard.TargetName="accountswitcher_button_scaletransform" 
+                                    Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="accountswitcher_button_in_scaley">
+                                <DoubleAnimation From="1" To="1.1" Duration="00:00:0.50" BeginTime="00:00:00"
+                                    Storyboard.TargetName="accountswitcher_button_scaletransform" 
+                                    Storyboard.TargetProperty="ScaleY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="accountswitcher_button_in_opacity_mouseenter">
+                                <DoubleAnimation From="1" To="0.85" Duration="00:00:0.50" BeginTime="00:00:00"
+                                    Storyboard.TargetName="accountswitcher_button" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Button.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="accountswitcher_button_out_scalex">
+                                <DoubleAnimation From="1.1" To="1" Duration="00:00:0.50" BeginTime="00:00:00"
+                                    Storyboard.TargetName="accountswitcher_button_scaletransform" 
+                                    Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="accountswitcher_button_out_scaley">
+                                <DoubleAnimation From="1.1" To="1" Duration="00:00:0.50" BeginTime="00:00:00"
+                                    Storyboard.TargetName="accountswitcher_button_scaletransform" 
+                                    Storyboard.TargetProperty="ScaleY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="accountswitcher_button_in_opacity_mouseleave">
+                                <DoubleAnimation From="0.85" To="1" Duration="00:00:0.50" BeginTime="00:00:00"
+                                    Storyboard.TargetName="accountswitcher_button" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+
+        <StackPanel x:Name="progressbar_stackpanel" Margin="335,610,288,40">
+            <Rectangle />
+        </StackPanel>
 
         <Button IsHitTestVisible="True" Cursor="Hand" Opacity="0.75" Height="40" Width="90" x:Name="seasonhandler_linkrect_github" Foreground="White" Background="#59FFFFFF" Margin="1048,472,62,188" RenderTransformOrigin="0.5,0.5" Click="seasonhandler_linkrect_github_Click">
 
@@ -823,5 +1015,8 @@
 
         <!-- Invisible Navbar -->
         <Rectangle Margin="10,10,10,650" RadiusX="20" RadiusY="20" MouseDown="Rectangle_MouseDown" Fill="#00000000"></Rectangle>
+        
+        <!-- Close and minimize buttons -->
+        <StackPanel Height="25" Width="75" Margin="1085,18,40,658"></StackPanel>
     </Grid>
 </Window>
