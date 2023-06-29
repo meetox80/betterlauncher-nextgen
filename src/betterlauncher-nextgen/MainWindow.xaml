@@ -306,6 +306,9 @@
 
         <!-- Elements -->
         <Rectangle x:Name="versionhandler" Width="250" RadiusX="20" RadiusY="20" Margin="50,50,900,40" >
+            <Rectangle.Effect>
+                <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="40" Opacity="0.15"/>
+            </Rectangle.Effect>
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFE6ECF2"/>
@@ -384,7 +387,7 @@
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#00E6ECF2"/>
-                    <GradientStop Color="#FFF2F2F1" Offset="1"/>
+                    <GradientStop Color="#66F2F2F1" Offset="1"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
 
@@ -509,6 +512,9 @@
         </Button>
 
         <Rectangle x:Name="seasonhandler" Margin="335,50,39,168" RadiusX="20" RadiusY="20" MouseMove="seasonhandler_MouseMove" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.Effect>
+                <DropShadowEffect ShadowDepth="0" Direction="0" BlurRadius="25" Opacity="0.25"/>
+            </Rectangle.Effect>
             <Rectangle.OpacityMask>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.25,0">
                     <GradientStop Color="#7F000000"/>
@@ -607,10 +613,10 @@
             </Rectangle.Triggers>
         </Rectangle>
 
-        <Button Cursor="Hand" x:Name="accountswitcher_button" Height="45" Width="150" Background="#7FFFFFFF" Margin="988,68,62,582" RenderTransformOrigin="0.5,0.5" Click="accountswitcher_button_Click">
+        <Button Cursor="Hand" BorderThickness="1" x:Name="accountswitcher_button" Height="45" Width="150" Background="#7FFFFFFF" Margin="988,68,62,582" RenderTransformOrigin="0.5,0.5" Click="accountswitcher_button_Click" BorderBrush="#7FFFFFFF">
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
 
@@ -624,7 +630,7 @@
             </Button.RenderTransform>
 
             <Grid>
-                <Rectangle Height="45" Width="45" RadiusX="10" RadiusY="10" Margin="-105, 0, 0, 0">
+                <Rectangle Height="38" Width="38" Margin="-51,2,51,3"  RadiusX="5" RadiusY="5">
                     <Rectangle.Effect>
                         <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="60" Color="White" RenderingBias="Performance"/>
                     </Rectangle.Effect>
@@ -633,7 +639,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
 
-                <TextBlock FontSize="10" TextAlignment="Center" Text="none" FontFamily="/Fonts/#Proxima Nova" Margin="-30,17,-74,15" Foreground="#CC000000" ></TextBlock>
+                <TextBlock FontSize="10" TextAlignment="Center" Text="none" FontFamily="/Fonts/#Proxima Nova" Margin="-13,16,-56,16" Foreground="#CC000000" ></TextBlock>
             </Grid>
 
             <Button.Triggers>
@@ -740,7 +746,7 @@
             <Rectangle />
         </StackPanel>
 
-        <Button IsHitTestVisible="True" Cursor="Hand" Opacity="0.75" Height="40" Width="90" x:Name="seasonhandler_linkrect_github" Foreground="White" Background="#59FFFFFF" Margin="1048,472,62,188" RenderTransformOrigin="0.5,0.5" Click="seasonhandler_linkrect_github_Click">
+        <Button IsHitTestVisible="True" Cursor="Hand" BorderThickness="1" Opacity="0.75" Height="40" Width="90" x:Name="seasonhandler_linkrect_github" Foreground="White" Background="#59FFFFFF" Margin="1048,472,62,188" RenderTransformOrigin="0.5,0.5" Click="seasonhandler_linkrect_github_Click" BorderBrush="#7FFFFFFF">
 
             <StackPanel Orientation="Horizontal">
                 <Path Stretch="Fill" Height="16" Fill="White" Width="16" Data="M80 104a24 24 0 1 0 0-48 24 24 0 1 0 0 48zm80-24c0 32.8-19.7 61-48 73.3v87.8c18.8-10.9 40.7-17.1 64-17.1h96c35.3 0 64-28.7 64-64v-6.7C307.7 141 288 112.8 288 80c0-44.2 35.8-80 80-80s80 35.8 80 80c0 32.8-19.7 61-48 73.3V160c0 70.7-57.3 128-128 128H176c-35.3 0-64 28.7-64 64v6.7c28.3 12.3 48 40.5 48 73.3c0 44.2-35.8 80-80 80s-80-35.8-80-80c0-32.8 19.7-61 48-73.3V352 153.3C19.7 141 0 112.8 0 80C0 35.8 35.8 0 80 0s80 35.8 80 80zm232 0a24 24 0 1 0 -48 0 24 24 0 1 0 48 0zM80 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" Margin="5,0,5,0"></Path>
@@ -752,6 +758,9 @@
                     <Setter Property="CornerRadius" Value="7.5"/>
                 </Style>
             </Button.Resources>
+            <Button.Effect>
+                <DropShadowEffect Direction="0" ShadowDepth="0" Opacity="0.5" BlurRadius="20"/>
+            </Button.Effect>
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform x:Name="seasonhandler_linkrect_github_scaletransform"/>
@@ -857,6 +866,9 @@
                     <Setter Property="CornerRadius" Value="20"/>
                 </Style>
             </Button.Resources>
+            <Button.Effect>
+                <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="25" Opacity="0.25"/>
+            </Button.Effect>
 
             <Button.RenderTransform>
                 <TransformGroup>
@@ -867,9 +879,9 @@
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0,1">
-                    <GradientStop Color="#FFC2C1F1"/>
-                    <GradientStop Color="#FFA6CACE" Offset="1"/>
+                <LinearGradientBrush EndPoint="0.5,0" StartPoint="0,1">
+                    <GradientStop Color="#FF7574A4"/>
+                    <GradientStop Color="#FF74B2B9" Offset="1"/>
                 </LinearGradientBrush>
             </Button.Background>
 
@@ -994,6 +1006,9 @@
         </Path>
 
         <Label x:Name="seasonhandler_title" Content="BetterLauncher" IsHitTestVisible="False" Foreground="White" FontSize="25" FontFamily="/Fonts/Poppins Light/#Poppins Light" Margin="377,268,625,386" >
+            <Label.Effect>
+                <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="20" Opacity="0.5"/>
+            </Label.Effect>
             <Label.Triggers>
                 <EventTrigger RoutedEvent="Window.Loaded">
                     <BeginStoryboard>
@@ -1015,7 +1030,7 @@
 
         <!-- Invisible Navbar -->
         <Rectangle Margin="10,10,10,650" RadiusX="20" RadiusY="20" MouseDown="Rectangle_MouseDown" Fill="#00000000"></Rectangle>
-        
+
         <!-- Close and minimize buttons -->
         <StackPanel Height="25" Width="75" Margin="1085,18,40,658"></StackPanel>
     </Grid>

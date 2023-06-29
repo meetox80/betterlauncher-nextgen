@@ -58,7 +58,7 @@ namespace betterlauncher_nextgen
             string SupportedVersions = ConfigManager.GetKey("ShowVersions");
             string[] supportedVersionsArray = SupportedVersions.Split(',');
 
-            DropShadowEffect dropShadowEffect = new DropShadowEffect { BlurRadius = 25, Opacity = 0.15 };
+            DropShadowEffect dropShadowEffect = new DropShadowEffect { BlurRadius = 25, Opacity = 0.10 };
             int xe = 0; foreach (MVersionMetadata ver in versions)
             {
                 foreach (string supportedVersion in supportedVersionsArray)
