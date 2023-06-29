@@ -11,8 +11,7 @@ namespace betterlauncher_nextgen.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow MainWindowFrame = new MainWindow();
-            MainWindowFrame.Topmost = false;
+            MainWindow.Instance.Topmost = false;
             this.Hide();
         }
     }

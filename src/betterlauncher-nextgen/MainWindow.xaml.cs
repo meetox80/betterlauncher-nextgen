@@ -22,9 +22,12 @@ namespace betterlauncher_nextgen
         #endregion
 
         #region VersionLoading, Startup
+        public static MainWindow Instance;
         public MainWindow()
         {
             InitializeComponent();
+            // Manage this window from other windows
+            Instance = this;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
