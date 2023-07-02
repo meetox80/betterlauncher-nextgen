@@ -115,6 +115,7 @@ namespace betterlauncher_nextgen
             ClickedButton.BorderThickness = new Thickness(1.5);
             BetterLauncher_SelectedVersion = ClickedButton.Content.ToString();
         }
+        #endregion
 
         #region VersionLoading:Utils
         private StackPanel FindParentStackPanel(UIElement element)
@@ -126,7 +127,6 @@ namespace betterlauncher_nextgen
             }
             return parent as StackPanel;
         }
-        #endregion
         #endregion
 
         #region Background

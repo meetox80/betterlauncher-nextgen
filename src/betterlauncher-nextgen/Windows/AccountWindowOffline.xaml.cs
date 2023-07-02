@@ -2,9 +2,9 @@
 
 namespace betterlauncher_nextgen.Windows
 {
-    public partial class AccountWindow : Window
+    public partial class AccountWindowOffline : Window
     {
-        public AccountWindow()
+        public AccountWindowOffline()
         {
             InitializeComponent();
         }
@@ -13,11 +13,6 @@ namespace betterlauncher_nextgen.Windows
         {
             MainWindow.Instance.Topmost = false;
             this.Hide();
-        }
-
-        private async void handler_accountselector_microsoft_Click(object sender, RoutedEventArgs e)
-        {
-            // mslogin :>
         }
     }
 }

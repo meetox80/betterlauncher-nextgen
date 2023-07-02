@@ -37,7 +37,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ScrollBar}">
                         <Grid x:Name="GridRoot" Width="8" Background="{TemplateBinding Background}">
-                            <Track x:Name="PART_Track" IsDirectionReversed="true" Focusable="false">
+                            <Track x:Name="PART_Track" IsDirectionReversed="true" Focusable="false" Cursor="Hand">
                                 <Track.Thumb>
                                     <Thumb x:Name="ScrollBarThumb" Background="{TemplateBinding Foreground}" Style="{StaticResource ScrollThumbs}" />
                                 </Track.Thumb>
@@ -92,6 +92,9 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            
+            <!-- Fuck focusing, its a bug - rvyk -->
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         </Style>
     </Window.Resources>
 
@@ -972,6 +975,73 @@
 
                             <Storyboard x:Name="launchbutton_in_opacity_mouseleave">
                                 <DoubleAnimation From="0.75" To="1" Duration="00:00:0.50" BeginTime="00:00:00"
+                                    Storyboard.TargetName="launchbutton" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <Storyboard x:Name="launchbutton_click_in_scalex">
+                                <DoubleAnimation From="1.1" To="1.15" Duration="00:00:0.20" BeginTime="00:00:00"
+                                    Storyboard.TargetName="launchbutton_scaletransform" 
+                                    Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="launchbutton_click_in_scaley">
+                                <DoubleAnimation From="1.1" To="1.15" Duration="00:00:0.20" BeginTime="00:00:00"
+                                    Storyboard.TargetName="launchbutton_scaletransform" 
+                                    Storyboard.TargetProperty="ScaleY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="launchbutton_click_out_scalex">
+                                <DoubleAnimation From="1.15" To="1.1" Duration="00:00:0.20" BeginTime="00:00:0.20"
+                                    Storyboard.TargetName="launchbutton_scaletransform" 
+                                    Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Name="launchbutton_click_out_scaley">
+                                <DoubleAnimation From="1.15" To="1.1" Duration="00:00:0.20" BeginTime="00:00:0.20"
+                                    Storyboard.TargetName="launchbutton_scaletransform" 
+                                    Storyboard.TargetProperty="ScaleY">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <!-- Opacity add-on -->
+                            
+                            <Storyboard x:Name="launchbutton_click_in_opacity">
+                                <DoubleAnimation From="0.75" To="0.90" Duration="00:00:0.20" BeginTime="00:00:00"
+                                    Storyboard.TargetName="launchbutton" 
+                                    Storyboard.TargetProperty="Opacity">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut"></CubicEase>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                            <Storyboard x:Name="launchbutton_click_out_opacity">
+                                <DoubleAnimation From="0.90" To="0.75" Duration="00:00:0.20" BeginTime="00:00:0.20"
                                     Storyboard.TargetName="launchbutton" 
                                     Storyboard.TargetProperty="Opacity">
                                     <DoubleAnimation.EasingFunction>
