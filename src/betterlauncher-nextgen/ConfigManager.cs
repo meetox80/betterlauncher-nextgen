@@ -1,55 +1,60 @@
 ﻿using System;
 using System.IO;
 
-namespace betterlauncher_nextgen
+public class ConfigManager
 {
-    internal class ConfigManager
+    private static string configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".betterlauncher-cs", "betterlauncher.config");
+    public static void EnsureConfigFileExists()
     {
-        public static string ConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".betterlauncher-cs", "betterlauncher.config");
-        public static void EnsureConfig()
+        if (!File.Exists(configPath))
         {
-            if (!File.Exists(ConfigPath))
+            Directory.CreateDirectory(Path.GetDirectoryName(configPath));
+            File.Create(configPath).Dispose();
+            SetKey("ShowVersions", "release,local");
+        }
+    }
+
+    public static void SetKey(string key, string value)
+    {
+        EnsureConfigFileExists();
+
+        string[] lines = File.ReadAllLines(configPath);
+        bool keyExists = false;
+
+        for (int i = 0; i < lines.Length; i++)
+        {
+            string line = lines[i];
+            if (line.StartsWith(key + "="))
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(ConfigPath));
-                File.Create(ConfigPath).Dispose();
-                // release, snapshot, old_alpha, old_beta, local
-                SetKey("ShowVersions", "release,local");
+                lines[i] = key + "=" + value;
+                keyExists = true;
+                break;
             }
         }
 
-        public static void SetKey(string key, string keyvalue)
+        if (!keyExists)
         {
-            string[] lines = File.ReadAllLines(ConfigPath);
-
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (lines[i].StartsWith(key + "="))
-                {
-                    lines[i] = $"{key}={keyvalue}";
-                    File.WriteAllLines(ConfigPath, lines);
-                    return;
-                }
-            }
-
-            // Key does not exist, add it as a new key-value pair
-            string lineToAdd = $"{key}={keyvalue}";
-            File.AppendAllText(ConfigPath, lineToAdd);
+            Array.Resize(ref lines, lines.Length + 1);
+            lines[lines.Length - 1] = key + "=" + value;
         }
 
-        public static string GetKey(string key)
+        File.WriteAllLines(configPath, lines);
+    }
+
+    public static string GetKey(string key)
+    {
+        EnsureConfigFileExists();
+
+        string[] lines = File.ReadAllLines(configPath);
+
+        foreach (string line in lines)
         {
-            string[] lines = File.ReadAllLines(ConfigPath);
-
-            foreach (string line in lines)
+            if (line.StartsWith(key + "="))
             {
-                if (line.StartsWith(key + "="))
-                {
-                    string value = line.Substring(key.Length + 1);
-                    return value;
-                }
+                return line.Substring(key.Length + 1);
             }
-
-            return null;
         }
+
+        return "";
     }
 }

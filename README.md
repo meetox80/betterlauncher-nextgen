@@ -10,7 +10,7 @@
 
 <!-- Licenses, etc... -->
 
-Fully Maintained by [lemonek](https://github.com/lemonekq) (GFX, BRANDING, CODE, DESIGN).
+Fully Maintained by [lemonek](https://github.com/lemonekq) (GFX, BRANDING, CODE, DESIGN). Special thanks to **ksi123456ab** for helping with microsoft auth.
 Built Using [WPF](https://github.com/dotnet/wpf), [.NET Framework](https://dotnet.microsoft.com/en-us/), [CMLib Auth](https://github.com/CmlLib/CmlLib.Core.Auth.Microsoft). <br>
 [See Apache License 2.0](https://github.com/bettervulcan/betterlauncher-csharp/blob/main/LICENSE), [See MIT License (CMLib, WPF)](https://github.com/CmlLib/CmlLib.Core.Auth.Microsoft/blob/master/LICENSE). Betterlauncher-nextgen is an exclusive version of the electron one.
 <br><br>

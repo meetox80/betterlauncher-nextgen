@@ -1,4 +1,6 @@
 ﻿using CmlLib.Core;
+using CmlLib.Core.Auth.Microsoft;
+using CmlLib.Core.Auth.Microsoft.Sessions;
 using CmlLib.Core.Version;
 using CmlLib.Core.VersionMetadata;
 using System;
@@ -10,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using XboxAuthNet.Game.Accounts;
 
 namespace betterlauncher_nextgen
 {
@@ -19,9 +22,12 @@ namespace betterlauncher_nextgen
         public static int BackgroundCount = 2;
         public static string BetterLauncher_Version = "0.0.0";
         public static string BetterLauncher_SelectedVersion = "";
+
+        public static JELoginHandler LoginHandler;
         #endregion
 
         #region VersionLoading, Startup
+
         public static MainWindow Instance;
         public MainWindow()
         {
@@ -33,6 +39,12 @@ namespace betterlauncher_nextgen
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.Title = $"BetterLauncher - {BetterLauncher_Version}";
+
+            LoginHandler = JELoginHandlerBuilder.BuildDefault();
+            try
+            {
+                var AuthResult = await LoginHandler.AuthenticateSilently(); return;
+            } catch { }
 
             handler_bg.Height = 50; handler_bg.Width = 50; handler_bg_rotatetransform.Angle = 90; handler_bg.Margin = new Thickness(0, 250, 0, 0); handler_bg.Opacity = 0.0f;
             handler_bg_mask.Height = 50; handler_bg_mask.Width = 50; handler_bg_mask_rotatetransform.Angle = 90; handler_bg_mask.Margin = new Thickness(0, 250, 0, 0); handler_bg_mask.Opacity = 0.0f;
@@ -47,7 +59,7 @@ namespace betterlauncher_nextgen
             versionhandler_blend_top.Opacity = 0.0f;
             versionhandler_blend_bottom.Opacity = 0.0f;
             accountswitcher_button.Opacity = 0.0f;
-            ConfigManager.EnsureConfig();
+            ConfigManager.EnsureConfigFileExists();
 
             RotateBackground();
 
