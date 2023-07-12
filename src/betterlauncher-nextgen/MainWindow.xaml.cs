@@ -3,6 +3,7 @@ using CmlLib.Core.Auth.Microsoft;
 using CmlLib.Core.Auth.Microsoft.Sessions;
 using CmlLib.Core.Version;
 using CmlLib.Core.VersionMetadata;
+using Microsoft.Web.WebView2.Core;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -36,15 +37,34 @@ namespace betterlauncher_nextgen
             Instance = this;
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        // feat: AlphaBs (ksi123456ab) https://github.com/AlphaBs/XboxAuthNet/blob/main/src/Platforms/WinForm/WebView2WebUI.cs
+        public bool CheckForWebView()
+        {
+            try
+            {
+                string wv2Version = CoreWebView2Environment.GetAvailableBrowserVersionString();
+                return !string.IsNullOrEmpty(wv2Version);
+            }
+            catch (WebView2RuntimeNotFoundException)
+            {
+                return false;
+            }
+            catch (Exception ex) when (ex is BadImageFormatException || ex is DllNotFoundException)
+            {
+                return false;
+                //throw new MsalClientException(MsalError.WebView2LoaderNotFound, MsalErrorMessage.WebView2LoaderNotFound, ex);
+            }
+        }
+
+        public async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.Title = $"BetterLauncher - {BetterLauncher_Version}";
 
-            LoginHandler = JELoginHandlerBuilder.BuildDefault();
-            try
+            if (!CheckForWebView())
             {
-                var AuthResult = await LoginHandler.AuthenticateSilently(); return;
-            } catch { }
+                MessageBox.Show("WebView2 not found.");
+                Process.Start(new ProcessStartInfo { FileName = "https://go.microsoft.com/fwlink/p/?LinkId=2124703", UseShellExecute = true });
+            }
 
             handler_bg.Height = 50; handler_bg.Width = 50; handler_bg_rotatetransform.Angle = 90; handler_bg.Margin = new Thickness(0, 250, 0, 0); handler_bg.Opacity = 0.0f;
             handler_bg_mask.Height = 50; handler_bg_mask.Width = 50; handler_bg_mask_rotatetransform.Angle = 90; handler_bg_mask.Margin = new Thickness(0, 250, 0, 0); handler_bg_mask.Opacity = 0.0f;
@@ -87,7 +107,7 @@ namespace betterlauncher_nextgen
                         VersionButton.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Proxima Nova");
                         VersionButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE5E8EC"));
                         VersionButton.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF444444"));
-                        VersionButton.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFC2C1F1"));
+                        VersionButton.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF946FF2"));
                         VersionButton.BorderThickness = new Thickness(0, 0, 0, 0);
                         VersionButton.Resources = new ResourceDictionary();
                         VersionButton.Cursor = Cursors.Hand;
@@ -98,6 +118,13 @@ namespace betterlauncher_nextgen
                         }); VersionButton.Effect = dropShadowEffect;
 
                         VersionButton.Content = ver.Name;
+
+                        if (ver.IsLocalVersion)
+                        {
+                            VersionButton.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA3A0A0"));
+                            VersionButton.Content = "Local " + VersionButton.Content;
+                        }
+
                         versionhandler_stackpanel.Children.Add(VersionButton);
                     }
                 }
@@ -106,6 +133,17 @@ namespace betterlauncher_nextgen
             Rectangle MarginRectangle = new Rectangle();
             MarginRectangle.Width = 1; MarginRectangle.Height = 20;
             versionhandler_stackpanel.Children.Add(MarginRectangle);
+
+            LoginHandler = JELoginHandlerBuilder.BuildDefault();
+            try
+            {
+                var AuthResult = await LoginHandler.AuthenticateSilently(); return;
+                if (AuthResult.Username != "" && AuthResult.Username != null)
+                {
+                    accountswitcher_button_textblock.Text = AuthResult.Username;
+                }
+            }
+            catch { }
         }
 
         private void VersionButton_Click(object sender, RoutedEventArgs e)

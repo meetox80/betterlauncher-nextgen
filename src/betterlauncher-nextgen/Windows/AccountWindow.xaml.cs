@@ -1,8 +1,6 @@
 ﻿using System;
-using XboxAuthNet.OAuth;
 using System.Windows;
 using CmlLib.Core.Auth.Microsoft;
-using System.Security.Principal;
 
 namespace betterlauncher_nextgen.Windows
 {
@@ -26,15 +24,21 @@ namespace betterlauncher_nextgen.Windows
             MainWindow.Instance.Topmost = false;
             try
             {
-                var authenticator = MainWindow.LoginHandler.CreateAuthenticator(account, default);
+                var authenticator = MainWindow.LoginHandler.CreateAuthenticatorWithNewAccount();
                 authenticator.AddMicrosoftOAuthForJE(oauth => oauth.Interactive()); // Microsoft OAuth
                 authenticator.AddXboxAuthForJE(xbox => xbox.Basic()); // XboxAuth
                 authenticator.AddJEAuthenticator(); // JEAuthenticator
                 var session = await authenticator.ExecuteForLauncherAsync();
+                this.Close();
+                MessageBox.Show(session.Username);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                if (!ex.ToString().Contains("User canceled auth"))
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                this.Close();
             }
         }
     }

@@ -642,7 +642,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
 
-                <TextBlock FontSize="10" TextAlignment="Center" Text="none" FontFamily="/Fonts/#Proxima Nova" Margin="-13,16,-56,16" Foreground="#CC000000" ></TextBlock>
+                <TextBlock x:Name="accountswitcher_button_textblock" FontSize="10" TextAlignment="Center" Text="none" FontFamily="/Fonts/#Proxima Nova" Margin="-13,16,-56,16" Foreground="#CC000000" ></TextBlock>
             </Grid>
 
             <Button.Triggers>
